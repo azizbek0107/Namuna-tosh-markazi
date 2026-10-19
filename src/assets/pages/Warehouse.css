@@ -1,0 +1,350 @@
+.warehouse-page {
+    display: grid;
+    gap: 22px;
+  }
+  
+  .warehouse-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .warehouse-heading h2 {
+    font-size: 1.3125rem; /* 21px converted to rem assuming base font size is 16px */
+    color: #202938;
+  }
+  
+  .warehouse-heading p {
+    margin-top: 7px;
+    color: #8993a3;
+    font-size: 13px;
+  }
+  
+  .warehouse-add-btn,
+  .warehouse-save-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 0;
+    border-radius: 9px;
+    background: #e5a000;
+    color: #172033;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+  
+  .warehouse-add-btn {
+    padding: 13px 17px;
+    font-size: 12px;
+  }
+  
+  .warehouse-add-btn:hover,
+  .warehouse-save-btn:hover {
+    background: #f4b51b;
+  }
+  
+  .warehouse-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  
+  .warehouse-summary-card {
+    display: grid;
+    gap: 12px;
+    min-width: 0;
+    padding: 22px;
+    background: #fff;
+    border: 1px solid #e9edf4;
+    border-radius: 13px;
+  }
+  
+  .warehouse-summary-card span {
+    color: #8993a3;
+    font-size: 12px;
+  }
+  
+  .warehouse-summary-card strong {
+    color: #202938;
+    font-size: clamp(17px, 2vw, 23px);
+    overflow-wrap: anywhere;
+  }
+  
+  .warehouse-table-panel {
+    min-width: 0;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e9edf4;
+    border-radius: 13px;
+  }
+  
+  .warehouse-toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 20px;
+    border-bottom: 1px solid #edf0f5;
+  }
+  
+  .warehouse-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: min(380px, 100%);
+    padding: 0 12px;
+    border: 1px solid #e2e7ef;
+    border-radius: 9px;
+    color: #8993a3;
+  }
+  
+  .warehouse-search input {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: #202938;
+    font: inherit;
+    font-size: 12px;
+  }
+  
+  .warehouse-toolbar select,
+  .warehouse-modal select,
+  .warehouse-modal input {
+    min-width: 0;
+    padding: 11px 12px;
+    border: 1px solid #e2e7ef;
+    border-radius: 8px;
+    outline: none;
+    background: #fff;
+    color: #465267;
+    font: inherit;
+    font-size: 12px;
+  }
+  
+  .warehouse-toolbar select:focus,
+  .warehouse-modal select:focus,
+  .warehouse-modal input:focus {
+    border-color: #e5a000;
+  }
+  
+  .warehouse-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .warehouse-table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+  }
+  
+  .warehouse-table th {
+    padding: 15px 17px;
+    background: #f9fafc;
+    color: #8993a3;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  
+  .warehouse-table td {
+    padding: 16px 17px;
+    border-bottom: 1px solid #edf0f5;
+    color: #596579;
+    font-size: 12px;
+  }
+  
+  .warehouse-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  
+  .warehouse-table tbody tr:hover {
+    background: #fdfdfd;
+  }
+  
+  .warehouse-product-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #202938;
+  }
+  
+  .warehouse-product-name strong {
+    font-size: 12px;
+  }
+  
+  .warehouse-product-icon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: #fff3d6;
+    color: #b98100;
+  }
+  
+  .warehouse-category {
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 6px;
+    background: #f2f4f8;
+    color: #586579;
+    font-size: 10px;
+  }
+  
+  .warehouse-actions {
+    display: flex;
+    gap: 7px;
+  }
+  
+  .warehouse-edit-btn,
+  .warehouse-delete-btn,
+  .warehouse-close-btn {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #e8ecf3;
+    border-radius: 8px;
+    background: #fff;
+  }
+  
+  .warehouse-edit-btn {
+    color: #5265c5;
+  }
+  
+  .warehouse-delete-btn {
+    color: #dc4242;
+  }
+  
+  .warehouse-edit-btn:hover {
+    background: #f0f2ff;
+  }
+  
+  .warehouse-delete-btn:hover {
+    background: #fff0f0;
+  }
+  
+  .warehouse-table-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #edf0f5;
+    color: #8993a3;
+    font-size: 11px;
+  }
+  
+  .warehouse-empty {
+    padding: 35px !important;
+    text-align: center;
+  }
+  
+  /* MODAL */
+  
+  .warehouse-modal-overlay {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    overflow-y: auto;
+    background: rgb(15 23 42 / 55%);
+  }
+  
+  .warehouse-modal {
+    width: min(100%, 480px);
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    padding: 25px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 20px 70px rgb(0 0 0 / 15%);
+  }
+  
+  .warehouse-modal-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .warehouse-modal-heading h3 {
+    color: #202938;
+    font-size: 19px;
+  }
+  
+  .warehouse-modal-heading p {
+    margin-top: 7px;
+    color: #8993a3;
+    font-size: 12px;
+  }
+  
+  .warehouse-close-btn {
+    flex-shrink: 0;
+    color: #647084;
+  }
+  
+  .warehouse-modal form {
+    display: grid;
+    gap: 17px;
+  }
+  
+  .warehouse-modal form > label,
+  .warehouse-form-row label {
+    display: grid;
+    gap: 8px;
+    color: #465267;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .warehouse-modal input,
+  .warehouse-modal select {
+    width: 100%;
+    padding: 13px;
+  }
+  
+  .warehouse-form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  
+  .warehouse-save-btn {
+    width: 100%;
+    margin-top: 5px;
+    padding: 14px;
+    font-size: 12px;
+  }
+  
+  @media (max-width: 700px) {
+    .warehouse-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  
+    .warehouse-summary {
+      grid-template-columns: 1fr;
+    }
+  
+    .warehouse-toolbar {
+      flex-direction: column;
+      padding: 14px;
+    }
+  
+    .warehouse-search {
+      width: 100%;
+    }
+  
+    .warehouse-toolbar select {
+      width: 100%;
+    }
+  
+    .warehouse-form-row {
+      grid-template-columns: 1fr;
+    }
+  }
