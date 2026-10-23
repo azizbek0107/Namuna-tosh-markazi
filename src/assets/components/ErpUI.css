@@ -1,0 +1,20 @@
+.erp-page { display: grid; gap: 22px; }
+.erp-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+.erp-toolbar h3 { font-size: 16px; }
+.erp-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.erp-secondary { padding: 10px 14px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-subtle); color: var(--text-secondary); font-size: 12px; }
+.erp-row-actions { display: flex; gap: 10px; }
+.erp-row-actions button { padding: 7px 10px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface-subtle); color: var(--text-secondary); font-size: 11px; }
+.erp-row-actions button:disabled { opacity: .5; cursor: default; }
+.erp-status { display: inline-block; padding: 6px 9px; border-radius: 7px; background: var(--accent-surface); color: var(--accent-text); }
+.erp-search { min-width: 180px; padding: 11px 12px; border: 1px solid var(--input-border); border-radius: 8px; background: var(--surface); color: var(--text-main); font: inherit; font-size: 12px; }
+.erp-page .sales-form { margin-top: 16px; }
+.erp-page .sales-form textarea { resize: vertical; min-height: 85px; padding: 12px; font: inherit; border: 1px solid var(--input-border); border-radius: 9px; background: var(--surface); color: var(--text-main); }
+.erp-page .sales-checkout { justify-content: flex-end; }
+.erp-page .dashboard-source { margin-bottom: 0; }
+.erp-full { grid-column: 1 / -1; }
+.catalog-category-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.catalog-category-buttons [aria-pressed="true"] { background: var(--accent-surface); border-color: #e5a000; color: var(--accent-text); }
+.warehouse-summary.cashier-summary { grid-template-columns: repeat(4, minmax(150px, 1fr)); overflow-x: auto; }
+.warehouse-table-wrapper.erp-table-scroll { overflow-y: auto; }
+.erp-table-scroll thead th { position: sticky; top: 0; z-index: 1; }

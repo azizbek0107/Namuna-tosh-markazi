@@ -12,12 +12,12 @@
   
   .warehouse-heading h2 {
     font-size: 1.3125rem; /* 21px converted to rem assuming base font size is 16px */
-    color: #202938;
+    color: var(--text-main);
   }
   
   .warehouse-heading p {
     margin-top: 7px;
-    color: #8993a3;
+    color: var(--text-muted);
     font-size: 13px;
   }
   
@@ -32,7 +32,7 @@
     background: #e5a000;
     color: #172033;
     font-weight: 700;
-    transition: background 0.2s;
+    transition: var(--theme-transition), transform 0.2s;
   }
   
   .warehouse-add-btn {
@@ -56,18 +56,18 @@
     gap: 12px;
     min-width: 0;
     padding: 22px;
-    background: #fff;
-    border: 1px solid #e9edf4;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 13px;
   }
   
   .warehouse-summary-card span {
-    color: #8993a3;
+    color: var(--text-muted);
     font-size: 12px;
   }
   
   .warehouse-summary-card strong {
-    color: #202938;
+    color: var(--text-main);
     font-size: clamp(17px, 2vw, 23px);
     overflow-wrap: anywhere;
   }
@@ -75,8 +75,8 @@
   .warehouse-table-panel {
     min-width: 0;
     overflow: hidden;
-    background: #fff;
-    border: 1px solid #e9edf4;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 13px;
   }
   
@@ -85,7 +85,7 @@
     justify-content: space-between;
     gap: 14px;
     padding: 20px;
-    border-bottom: 1px solid #edf0f5;
+    border-bottom: 1px solid var(--border);
   }
   
   .warehouse-search {
@@ -94,9 +94,9 @@
     gap: 10px;
     width: min(380px, 100%);
     padding: 0 12px;
-    border: 1px solid #e2e7ef;
+    border: 1px solid var(--border);
     border-radius: 9px;
-    color: #8993a3;
+    color: var(--text-muted);
   }
   
   .warehouse-search input {
@@ -106,7 +106,7 @@
     border: 0;
     outline: none;
     background: transparent;
-    color: #202938;
+    color: var(--text-main);
     font: inherit;
     font-size: 12px;
   }
@@ -116,11 +116,11 @@
   .warehouse-modal input {
     min-width: 0;
     padding: 11px 12px;
-    border: 1px solid #e2e7ef;
+    border: 1px solid var(--border);
     border-radius: 8px;
     outline: none;
-    background: #fff;
-    color: #465267;
+    background: var(--surface);
+    color: var(--text-secondary);
     font: inherit;
     font-size: 12px;
   }
@@ -144,8 +144,8 @@
   
   .warehouse-table th {
     padding: 15px 17px;
-    background: #f9fafc;
-    color: #8993a3;
+    background: var(--surface-subtle);
+    color: var(--text-muted);
     text-align: left;
     font-size: 10px;
     font-weight: 700;
@@ -153,8 +153,8 @@
   
   .warehouse-table td {
     padding: 16px 17px;
-    border-bottom: 1px solid #edf0f5;
-    color: #596579;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
     font-size: 12px;
   }
   
@@ -163,14 +163,14 @@
   }
   
   .warehouse-table tbody tr:hover {
-    background: #fdfdfd;
+    background: var(--surface-subtle);
   }
   
   .warehouse-product-name {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #202938;
+    color: var(--text-main);
   }
   
   .warehouse-product-name strong {
@@ -183,15 +183,15 @@
     width: 36px;
     height: 36px;
     border-radius: 9px;
-    background: #fff3d6;
-    color: #b98100;
+    background: var(--accent-surface);
+    color: var(--accent-text);
   }
   
   .warehouse-category {
     display: inline-block;
     padding: 6px 9px;
     border-radius: 6px;
-    background: #f2f4f8;
+    background: var(--surface-subtle);
     color: #586579;
     font-size: 10px;
   }
@@ -208,9 +208,9 @@
     place-items: center;
     width: 34px;
     height: 34px;
-    border: 1px solid #e8ecf3;
+    border: 1px solid var(--border);
     border-radius: 8px;
-    background: #fff;
+    background: var(--surface);
   }
   
   .warehouse-edit-btn {
@@ -231,8 +231,8 @@
   
   .warehouse-table-footer {
     padding: 15px 20px;
-    border-top: 1px solid #edf0f5;
-    color: #8993a3;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
     font-size: 11px;
   }
   
@@ -260,7 +260,7 @@
     overflow-y: auto;
     padding: 25px;
     border-radius: 15px;
-    background: #fff;
+    background: var(--surface);
     box-shadow: 0 20px 70px rgb(0 0 0 / 15%);
   }
   
@@ -273,19 +273,19 @@
   }
   
   .warehouse-modal-heading h3 {
-    color: #202938;
+    color: var(--text-main);
     font-size: 19px;
   }
   
   .warehouse-modal-heading p {
     margin-top: 7px;
-    color: #8993a3;
+    color: var(--text-muted);
     font-size: 12px;
   }
   
   .warehouse-close-btn {
     flex-shrink: 0;
-    color: #647084;
+    color: var(--text-secondary);
   }
   
   .warehouse-modal form {
@@ -297,7 +297,7 @@
   .warehouse-form-row label {
     display: grid;
     gap: 8px;
-    color: #465267;
+    color: var(--text-secondary);
     font-size: 12px;
     font-weight: 600;
   }

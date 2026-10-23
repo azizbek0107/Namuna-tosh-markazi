@@ -1,0 +1,31 @@
+.cash-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.cash-stats.cashier-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cashier-stats > article { min-width: 0; }
+.cashier-stats strong { font-size: clamp(14px, 1.6vw, 22px); }
+.cash-session-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+.cash-session-row > .panel { min-width: 0; margin: 0; }
+.cashier-sale-header { display: grid; grid-template-columns: minmax(0, 1fr) 120px; column-gap: 10px; row-gap: 8px; align-items: stretch; }
+.cashier-sale-header > .erp-toolbar { grid-column: 1; grid-row: 1 / 3; border-radius: 10px; }
+.cashier-sale-header > .cashier-sale-title { grid-column: 2; width: 120px; justify-self: end; padding: 8px 10px; border-radius: 5px; height: 38px; align-self: center; box-sizing: border-box; gap: 4px; cursor: pointer; transition: background-color .18s ease, border-color .18s ease; }
+.cashier-sale-header > .cashier-sale-title:hover, .cashier-sale-header > .cashier-sale-title[aria-pressed="true"] { background: var(--accent-surface); border-color: #e5a000; }
+.cashier-sale-title:focus-visible { outline: 2px solid #e5a000; outline-offset: 3px; }
+.cashier-sale-title span { font-size: 12px; font-weight: 600; }
+.cashier-sale-title svg { width: 16px; height: 16px; }
+.cashier-sale-header > .panel { min-width: 0; margin: 0; }
+.cashier-sale-title { display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--text-main); font: inherit; }
+.cashier-sale-title svg { flex-shrink: 0; color: var(--accent-text); }
+@media (max-width: 800px) { .cash-session-row { grid-template-columns: minmax(0, 1fr); } }
+.cash-stats article { display: grid; gap: 12px; }
+.cash-stats span { color: var(--text-muted); font-size: 12px; }
+.cash-stats strong { font-size: 22px; overflow-wrap: anywhere; }
+.cash-tabs { flex-wrap: wrap; }
+.cash-receipt-logo { display: block; width: 90px; height: 90px; object-fit: contain; margin: 0 auto; }
+.cash-receipt { overflow-wrap: anywhere; }
+.cash-tabs [aria-pressed="true"] { background: var(--accent-surface); border-color: #e5a000; color: var(--accent-text); }
+.cash-receipt { position: fixed; z-index: 20; inset: 12% auto auto 50%; transform: translateX(-50%); width: min(420px, 94vw); max-height: 80vh; overflow-y: auto; box-shadow: 0 0 0 100vmax #0008; display: grid; gap: 14px; }
+@media print {
+  body:has(.cash-receipt) * { visibility: hidden; }
+  body:has(.cash-receipt) .cash-receipt, body:has(.cash-receipt) .cash-receipt * { visibility: visible; }
+  .cash-receipt { position: fixed; inset: 0; transform: none; width: 100%; max-height: none; overflow: visible; box-shadow: none; color: #000; background: #fff; }
+  .cash-receipt .erp-actions { display: none; }
+}

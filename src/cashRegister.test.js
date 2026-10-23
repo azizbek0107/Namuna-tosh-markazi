@@ -1,0 +1,30 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { recordSale, cancelSale, paymentOf } from "./sales.js";
+const cashier = { id: "u1", name: "Kassir", role: "cashier" };
+const admin = { id: "a1", name: "Admin", role: "admin" };
+const initial = () => ({ products: [{ id: "p", name: "Granit", unit: "dona", quantity: 5 }], sales: [], operations: [] });
+const draft = { productId: "p", quantity: "2", price: "100", paymentMethod: "card", shiftId: "shift" };
+test("payment, authenticated cashier and shift are recorded; invalid payment and anonymous debt rejected", () => {
+  const result = recordSale(initial(), draft, "s", "2026-10-20T10:00:00Z", cashier);
+  assert.equal(result.inventory.sales[0].cashierId, "u1");
+  assert.equal(result.inventory.sales[0].shiftId, "shift");
+  assert.equal(result.inventory.sales[0].paymentMethod, "card");
+  assert.equal(result.inventory.products[0].quantity, 3);
+  assert.ok(recordSale(initial(), { ...draft, paymentMethod: "bad" }, "s", "now", cashier).error);
+  assert.ok(recordSale(initial(), { ...draft, paymentMethod: "debt" }, "s", "now", cashier).error);
+  assert.ok(recordSale(initial(), draft, "s", "now", { role: "worker" }).error);
+  assert.equal(paymentOf({ amount: 100 }), "unknown");
+});
+test("only admin may cancel with a reason; stock restored once and audit retained", () => {
+  const saved = recordSale(initial(), draft, "s", "2026-10-20T10:00:00Z", cashier).inventory;
+  assert.ok(cancelSale(saved, "s", "Xato", cashier, "now").error);
+  assert.ok(cancelSale(saved, "s", "", admin, "now").error);
+  const cancelled = cancelSale(saved, "s", "Xato", admin, "2026-10-20T11:00:00Z").inventory;
+  assert.equal(cancelled.products[0].quantity, 5);
+  assert.equal(cancelled.sales.length, 1);
+  assert.equal(cancelled.sales[0].cancelReason, "Xato");
+  assert.equal(cancelled.operations.length, 2);
+  assert.ok(cancelSale(cancelled, "s", "Xato", admin, "now").error);
+  assert.equal(saved.products[0].quantity, 3);
+});

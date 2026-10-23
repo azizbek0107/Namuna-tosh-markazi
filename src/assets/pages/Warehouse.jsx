@@ -9,56 +9,20 @@ import {
 } from "lucide-react";
 import "./Warehouse.css";
 
-const initialProducts = [
-  {
-    id: 1,
-    name: "Granit Black",
-    category: "Granit",
-    unit: "m²",
-    quantity: 120,
-    price: 250000,
-  },
-  {
-    id: 2,
-    name: "Marmar White",
-    category: "Marmar",
-    unit: "m²",
-    quantity: 85,
-    price: 320000,
-  },
-  {
-    id: 3,
-    name: "Sokl",
-    category: "Tayyor mahsulot",
-    unit: "metr",
-    quantity: 250,
-    price: 35000,
-  },
-  {
-    id: 4,
-    name: "Kafel",
-    category: "Kafel",
-    unit: "dona",
-    quantity: 500,
-    price: 45000,
-  },
-];
-
 const emptyForm = {
   name: "",
   category: "Granit",
   unit: "m²",
   quantity: "",
+  stockReference: "",
   price: "",
+  weightKg: "",
 };
 
 const formatMoney = (amount) =>
   new Intl.NumberFormat("uz-UZ").format(amount) + " so'm";
 
-function Warehouse() {
-  const [products, setProducts] = useState(initialProducts);
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("Barchasi");
+function Warehouse({ products, onSaveProduct, onDeleteProduct, search, setSearch, category, setCategory }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(emptyForm);
@@ -67,16 +31,17 @@ function Warehouse() {
     "Barchasi",
     "Granit",
     "Marmar",
-    "Kafel",
     "Xomashyo",
     "Tayyor mahsulot",
+    "Qo‘shimcha",
   ];
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       const matchesSearch = product.name
+        .concat(" ", product.code || "")
         .toLowerCase()
-        .includes(search.toLowerCase());
+        .includes(search.trim().toLowerCase());
 
       const matchesCategory =
         category === "Barchasi" || product.category === category;
@@ -85,10 +50,10 @@ function Warehouse() {
     });
   }, [products, search, category]);
 
-  const totalQuantity = products.reduce(
-    (sum, product) => sum + Number(product.quantity),
-    0
-  );
+  const quantitiesByUnit = products.reduce((totals, product) => {
+    totals[product.unit] = (totals[product.unit] ?? 0) + product.quantity;
+    return totals;
+  }, {});
 
   const totalValue = products.reduce(
     (sum, product) =>
@@ -109,7 +74,9 @@ function Warehouse() {
       category: product.category,
       unit: product.unit,
       quantity: String(product.quantity),
+      stockReference: String(product.stockReference ?? product.quantity),
       price: String(product.price),
+      weightKg: String(product.weightKg ?? ""),
     });
     setModalOpen(true);
   }
@@ -119,13 +86,18 @@ function Warehouse() {
 
     const quantity = Number(form.quantity);
     const price = Number(form.price);
+    const stockReference = form.stockReference === "" ? quantity : Number(form.stockReference);
 
     if (
       !form.name.trim() ||
       !Number.isFinite(quantity) ||
       !Number.isFinite(price) ||
+      !Number.isFinite(stockReference) ||
+      !Number.isFinite(quantity * price) ||
       quantity < 0 ||
       price < 0 ||
+      stockReference < 0 ||
+      (quantity > 0 && stockReference === 0) ||
       form.quantity === "" ||
       form.price === ""
     ) {
@@ -137,23 +109,12 @@ function Warehouse() {
       ...form,
       name: form.name.trim(),
       quantity,
+      stockReference,
       price,
     };
 
-    if (editingId !== null) {
-      setProducts((current) =>
-        current.map((product) =>
-          product.id === editingId
-            ? { ...product, ...productData }
-            : product
-        )
-      );
-    } else {
-      setProducts((current) => [
-        ...current,
-        { id: Date.now(), ...productData },
-      ]);
-    }
+    const error = onSaveProduct({ id: editingId ?? crypto.randomUUID(), ...productData }, editingId !== null);
+    if (error) { alert(error); return; }
 
     setModalOpen(false);
     setForm(emptyForm);
@@ -166,9 +127,7 @@ function Warehouse() {
     );
 
     if (confirmed) {
-      setProducts((current) =>
-        current.filter((product) => product.id !== id)
-      );
+      onDeleteProduct(id);
     }
   }
 
@@ -194,7 +153,11 @@ function Warehouse() {
 
         <div className="warehouse-summary-card">
           <span>Umumiy miqdor</span>
-          <strong>{totalQuantity.toLocaleString("uz-UZ")}</strong>
+          <strong>
+            {Object.entries(quantitiesByUnit)
+              .map(([unit, quantity]) => `${quantity.toLocaleString("uz-UZ")} ${unit}`)
+              .join(" / ") || "0"}
+          </strong>
         </div>
 
         <div className="warehouse-summary-card">
@@ -209,7 +172,8 @@ function Warehouse() {
             <Search size={19} />
             <input
               type="text"
-              placeholder="Mahsulot nomini qidiring..."
+              aria-label="Mahsulot nomini qidirish"
+              placeholder="Mahsulot nomi yoki ID raqami..."
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
@@ -236,7 +200,7 @@ function Warehouse() {
                 <th>Kategoriya</th>
                 <th>O'lchov</th>
                 <th>Miqdor</th>
-                <th>Narx</th>
+                <th>Tannarx</th>
                 <th>Umumiy qiymat</th>
                 <th>Amallar</th>
               </tr>
@@ -323,6 +287,9 @@ function Warehouse() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="warehouse-modal-title"
+            onKeyDown={(event) => {
+              if (event.key === "Escape") setModalOpen(false);
+            }}
           >
             <div className="warehouse-modal-heading">
               <div>
@@ -348,6 +315,7 @@ function Warehouse() {
                 Mahsulot nomi
                 <input
                   type="text"
+                  autoFocus
                   value={form.name}
                   onChange={(event) =>
                     setForm({ ...form, name: event.target.value })
@@ -380,7 +348,7 @@ function Warehouse() {
                 <select
                   value={form.unit}
                   onChange={(event) =>
-                    setForm({ ...form, unit: event.target.value })
+                    setForm({ ...form, unit: event.target.value, stockReference: "" })
                   }
                 >
                   <option value="dona">Dona</option>
@@ -392,6 +360,7 @@ function Warehouse() {
                 </select>
               </label>
 
+              {!['kg', 'tonna'].includes(form.unit) && <label>Bir birlik og‘irligi (kg)<input type="number" min="0.000000001" step="any" required value={form.weightKg} placeholder="Masalan: 12.5" onChange={(event) => setForm({ ...form, weightKg: event.target.value })} /></label>}
               <div className="warehouse-form-row">
                 <label>
                   Miqdor
@@ -408,7 +377,7 @@ function Warehouse() {
                 </label>
 
                 <label>
-                  Birlik narxi (so'm)
+                  Tannarx (so'm)
                   <input
                     type="number"
                     min="0"
@@ -421,6 +390,18 @@ function Warehouse() {
                   />
                 </label>
               </div>
+
+              <label>
+                To‘liq zaxira miqdori (100%)
+                <input
+                  type="number"
+                  min="0"
+                  step="any"
+                  value={form.stockReference}
+                  onChange={(event) => setForm({ ...form, stockReference: event.target.value })}
+                  placeholder="Kiritilmasa, joriy miqdor olinadi"
+                />
+              </label>
 
               <button className="warehouse-save-btn" type="submit">
                 {editingId !== null ? "O'zgarishlarni saqlash" : "Mahsulotni qo'shish"}

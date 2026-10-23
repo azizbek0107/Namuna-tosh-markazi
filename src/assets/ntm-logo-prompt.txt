@@ -1,0 +1,4 @@
+Tool: built-in image_gen, transparent_background=true.
+Asset: public/ntm-logo.png
+Prompt:
+Use case: logo-brand. Create a single polished compact company monogram logo using exactly the uppercase letters "NTM" (N, T, M), all three legible, for a stone manufacturing company dashboard. Flat geometric architectural lettering, subtly interlocking, bold clean strokes readable at 44px. Warm gold/amber matching #e5a000 with dark navy #172033 details, no additional text, no slogan, no mockup, no shadows, no scene. Square composition, tightly framed monogram with modest even padding. Genuinely transparent background. It will sit beside the company name on a dark navy sidebar and should also work on a light login card.
