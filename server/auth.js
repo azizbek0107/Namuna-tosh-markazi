@@ -1,33 +1,35 @@
 import { attendanceStore } from "./attendance.js";
 import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync, renameSync } from 'node:fs';
+import { fileJsonStore } from './jsonStore.js';
 import { resolve } from 'node:path';
 
 const publicUser = ({ id, login, name, role, employeeId }) => ({ id, login, name, role, employeeId });
-export function authMiddleware({ directory = resolve('.local-data'), secure = false } = {}) {
-  const file = resolve(directory, 'users.json');
-  const attendance = attendanceStore(directory);
-  const attendanceFile = resolve(directory, 'attendance.json');
-  const attendanceMarksFile = resolve(directory, 'attendance-marks.json');
-  const readAttendanceMarks = () => existsSync(attendanceMarksFile) ? JSON.parse(readFileSync(attendanceMarksFile, 'utf8')) : [];
-  const bonusesFile = resolve(directory, 'bonuses.json');
-  const readBonuses = () => existsSync(bonusesFile) ? JSON.parse(readFileSync(bonusesFile, 'utf8')) : [];
-  const readAttendance = () => existsSync(attendanceFile) ? JSON.parse(readFileSync(attendanceFile, 'utf8')) : [];
-  let users = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : [];
-  const sessions = new Map(), attempts = new Map();
+export function authMiddleware({ directory = resolve('.local-data'), secure = false, storage, sharedSessions = false } = {}) {
+  const store = storage ?? fileJsonStore(directory);
+  const attendance = attendanceStore(directory, store);
+  const readAttendanceMarks = () => store.read('attendance-marks', []);
+  const readBonuses = () => store.read('bonuses', []);
+  const readAttendance = () => store.read('attendance', []);
+  let users = store.read('users', []);
+  const sessions = new Map(sharedSessions ? store.read('sessions', []) : []);
+  const attempts = new Map(sharedSessions ? store.read('attempts', []) : []);
   const persist = (next) => {
-    mkdirSync(directory, { recursive: true });
-    writeFileSync(file + '.tmp', JSON.stringify(next), { mode: 0o600 });
-    renameSync(file + '.tmp', file); users = next;
+    store.write('users', next); users = next;
   };
   const cookie = (token, age) => `stonex-session=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${age}${secure ? '; Secure' : ''}`;
   return async (req, res, next) => {
     const originalPath = req.url?.split('?')[0];
     const path = originalPath?.replace(/^\/(?:api\/)?attendance(?=\/|$)/, '/api/auth/attendance');
     if (!path?.startsWith('/api/')) return next();
-    const send = (status, body) => { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(body)); };
+    const send = (status, body) => {
+      if (sharedSessions) {
+        store.write('sessions', [...sessions].filter(([, value]) => value.expires > Date.now()));
+        store.write('attempts', [...attempts].filter(([, value]) => value.until > Date.now()));
+      }
+      res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(body));
+    };
     try {
-      const stored = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : [];
+      const stored = store.read('users', []);
       if (JSON.stringify(stored) !== JSON.stringify(users)) {
         users = stored;
         sessions.clear();
@@ -75,7 +77,7 @@ export function authMiddleware({ directory = resolve('.local-data'), secure = fa
         const rows = readAttendanceMarks(), old = rows.find((item) => item.employeeId === employeeId && item.day === day);
         const record = { employeeId, name: String(data.name).trim().slice(0, 150), day, status: data.status, confirmedAt: new Date().toISOString(), confirmedBy: user.name, history: [...(old?.history ?? []), ...(old ? [{ status: old.status, confirmedAt: old.confirmedAt, confirmedBy: old.confirmedBy }] : [])] };
         const marks = [record, ...rows.filter((item) => item !== old)];
-        mkdirSync(directory, { recursive: true }); writeFileSync(attendanceMarksFile + '.tmp', JSON.stringify(marks), { mode: 0o600 }); renameSync(attendanceMarksFile + '.tmp', attendanceMarksFile);
+        store.write('attendance-marks', marks);
         return send(200, { marks });
       }
       if (path === '/api/auth/bonuses') {
@@ -87,8 +89,7 @@ export function authMiddleware({ directory = resolve('.local-data'), secure = fa
         const time = new Date().toISOString();
         const record = { id: old?.id ?? randomBytes(16).toString('hex'), employeeId, name: String(data.name).trim().slice(0, 150), day, amount: Math.round(amount * 100) / 100, note: String(data.note ?? '').trim(), updatedAt: time, updatedBy: user.name, history: [...(old?.history ?? []), { amount: old?.amount ?? null, note: old?.note ?? '', changedAt: time, changedBy: user.id }] };
         const bonuses = [record, ...rows.filter((item) => item.id !== record.id)];
-        mkdirSync(directory, { recursive: true });
-        writeFileSync(bonusesFile + '.tmp', JSON.stringify(bonuses), { mode: 0o600 }); renameSync(bonusesFile + '.tmp', bonusesFile);
+        store.write('bonuses', bonuses);
         return send(200, { bonuses });
       }
       if (['/api/auth/attendance', '/api/auth/attendance/update', '/api/auth/attendance/cancel', '/api/auth/attendance/schedule'].includes(path)) {

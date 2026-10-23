@@ -1,18 +1,9 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync, renameSync } from "node:fs";
-import { resolve } from "node:path";
+import { fileJsonStore } from './jsonStore.js';
 import { randomUUID } from "node:crypto";
 import { defaultSchedule, tashkentDay, validSchedule, scheduleTime } from "../src/attendance.js";
 
-export function attendanceStore(directory) {
-  const read = (name, fallback) => {
-    const file = resolve(directory, name + ".json");
-    return existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : fallback;
-  };
-  const write = (name, value) => {
-    const file = resolve(directory, name + ".json");
-    mkdirSync(directory, { recursive: true });
-    writeFileSync(file + ".tmp", JSON.stringify(value), { mode: 0o600 }); renameSync(file + ".tmp", file);
-  };
+export function attendanceStore(directory, storage = fileJsonStore(directory)) {
+  const { read, write } = storage;
   const snapshot = (user) => {
     const rows = read("attendance", []);
     return { attendance: user.role === "admin" ? rows : rows.filter((row) => row.userId === user.id), marks: user.role === "admin" ? read("attendance-marks", []) : [], schedule: read("attendance-schedule", defaultSchedule) };

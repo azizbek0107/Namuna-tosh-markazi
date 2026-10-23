@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "node --test src/erp.test.js src/stock.test.js src/productSales.test.js src/catalog.test.js src/cashRegister.test.js src/customerOrders.test.js src/uzbekPhone.test.js src/uzbekDate.test.js src/dateInputEditing.test.js src/cart.test.js src/permissions.test.js src/excelExport.test.js server/auth.test.js src/attendance.test.js server/attendance.test.js",
+    "test": "node --test src/erp.test.js src/stock.test.js src/productSales.test.js src/catalog.test.js src/cashRegister.test.js src/customerOrders.test.js src/uzbekPhone.test.js src/uzbekDate.test.js src/dateInputEditing.test.js src/cart.test.js src/permissions.test.js src/excelExport.test.js server/auth.test.js src/attendance.test.js server/attendance.test.js server/vercelHandler.test.js",
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",

@@ -5,7 +5,7 @@ import { authRequest, roleNames } from './authApi.js';
 
 export function AuthGate({ children }) {
   const [state, setState] = useState(null), [error, setError] = useState(''), [busy, setBusy] = useState(false);
-  const refresh = useCallback(() => authRequest('session').then(setState).catch(() => setError('Serverga ulanib bo‘lmadi. Sahifani yangilang.')), []);
+  const refresh = useCallback(() => authRequest('session').then((result) => { setState(result); setError(''); }).catch((err) => setError(err.message || 'Serverga ulanib bo‘lmadi. Sahifani yangilang.')), []);
   const signedIn = Boolean(state?.user);
   useEffect(() => { refresh(); }, [refresh]);
   useEffect(() => {
