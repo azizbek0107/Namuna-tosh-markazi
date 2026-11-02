@@ -1,0 +1,110 @@
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-primary: #080808;
+  --bg-secondary: #141414;
+  --gold-primary: #d4af37;
+  --gold-light: #f5d77a;
+  --gold-ink: #d4af37;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --text-soft: #d3d0c8;
+  --text-nav: #b3b0a9;
+  --text-caption: #b5aa8b;
+  --border: #ffffff12;
+  --border-gold: #d4af372e;
+  --accent-wash: #d4af370a;
+  --navbar-bg: #080808f5;
+  --navbar-scrolled-bg: #080808df;
+  --panel-bg: #0c0c0c;
+  --footer-bg: #0b0b0b;
+  --image-stage: #1b1b1b;
+  --button-start: #e4c461;
+  --button-bg: #d4af37;
+  --button-text: #171208;
+  --button-border: #e7c861;
+  --button-hover: #f5d77a;
+  --ui-shadow: #0000002e;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg-primary: #f8f7f3;
+  --bg-secondary: #ffffff;
+  --gold-primary: #a67c24;
+  --gold-light: #805b17;
+  --gold-ink: #805b17;
+  --text-primary: #171717;
+  --text-secondary: #64615b;
+  --text-soft: #49453c;
+  --text-nav: #555149;
+  --text-caption: #73674e;
+  --border: #17171718;
+  --border-gold: #a67c2445;
+  --accent-wash: #a67c240c;
+  --navbar-bg: #f8f7f3f5;
+  --navbar-scrolled-bg: #f8f7f3e6;
+  --panel-bg: #ffffff;
+  --footer-bg: #efede6;
+  --image-stage: #f0efeb;
+  --button-start: #927024;
+  --button-bg: #805c18;
+  --button-text: #ffffff;
+  --button-border: #8f691e;
+  --button-hover: #6c4c12;
+  --ui-shadow: #40331814;
+}
+html[data-theme-ready="true"] body,
+html[data-theme-ready="true"] #site-shell,
+html[data-theme-ready="true"] .navbar,
+html[data-theme-ready="true"] .footer,
+html[data-theme-ready="true"] .product-carousel,
+html[data-theme-ready="true"] .product-image-frame,
+html[data-theme-ready="true"] .mobile-panel,
+html[data-theme-ready="true"] .placeholder-art,
+html[data-theme-ready="true"] .admin-layout {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+.page-eyebrow,
+.product-edition {
+  color: var(--gold-ink);
+}
+p,
+h1,
+h2,
+h3,
+em,
+.page-eyebrow,
+.product-edition,
+.home-kicker,
+.home-caption,
+.home-bottom-label,
+.footer-bottom,
+.art-caption,
+.page-bottom-line {
+  transition: color 0.3s ease;
+}
+.brand-logo {
+  display: block;
+  width: 116px;
+  height: auto;
+  max-height: 72px;
+  object-fit: contain;
+  border-radius: 3px;
+}
+.footer-main .brand-logo {
+  width: 100px;
+  max-height: 62px;
+}
+.mobile-panel .brand-logo {
+  width: 128px;
+  max-height: none;
+}
+@media (max-width: 700px) {
+  .brand-logo {
+    width: 92px;
+    max-height: 59px;
+  }
+}

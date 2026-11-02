@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/images/namuna-logo.jpg";
 
 export default function Brand({ onClick }) {
   return (
@@ -8,12 +9,13 @@ export default function Brand({ onClick }) {
       onClick={onClick}
       aria-label="Namuna Tosh Markazi — bosh sahifa"
     >
-      <span className="brand-mark" aria-hidden="true">
-        N<span>Т</span>
-      </span>
-      <span className="brand-wordmark">
-        NAMUNA<span>TOSH MARKAZI</span>
-      </span>
+      <img
+        className="brand-logo"
+        src={logo}
+        width="1609"
+        height="977"
+        alt="Namuna Tosh Jilo logotipi"
+      />
     </Link>
   );
 }

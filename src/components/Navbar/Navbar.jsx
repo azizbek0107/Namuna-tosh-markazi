@@ -8,6 +8,7 @@ import NavItem from "./NavItem";
 import MobileMenu from "./MobileMenu";
 import { navigation } from "./navigation";
 import "./Navbar.css";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +50,7 @@ export default function Navbar() {
             </LayoutGroup>
           </nav>
           <div className="navbar-actions">
+            <ThemeToggle />
             <OrderButton />
             <button
               ref={triggerRef}

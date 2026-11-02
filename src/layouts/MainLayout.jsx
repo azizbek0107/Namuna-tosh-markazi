@@ -4,7 +4,7 @@ import Footer from "../components/Footer/Footer";
 
 export default function MainLayout() {
   return (
-    <div id="site-shell" className="min-h-screen bg-ink text-white">
+    <div id="site-shell" className="min-h-screen bg-ink">
       <a className="skip-link" href="#main-content">
         Asosiy mazmunga o‘tish
       </a>

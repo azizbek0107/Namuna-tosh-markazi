@@ -1,6 +1,6 @@
 .footer {
   border-top: 1px solid var(--border);
-  background: #0b0b0b;
+  background: var(--footer-bg);
 }
 .footer-main {
   display: flex;
@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  color: #d1c8b0;
+  color: var(--text-soft);
   font-size: 11px;
 }
 .footer-main > a:last-child:hover {
@@ -46,7 +46,7 @@
   gap: 18px;
   padding-block: 22px;
   border-top: 1px solid var(--border);
-  color: #a3a3a3;
+  color: var(--text-secondary);
 }
 .footer-bottom small,
 .footer-bottom a {

@@ -1,4 +1,5 @@
 .products-page .placeholder-art {
   background:
-    linear-gradient(135deg, #d4af370a, transparent 65%), var(--bg-secondary);
+    linear-gradient(135deg, var(--accent-wash), transparent 65%),
+    var(--bg-secondary);
 }

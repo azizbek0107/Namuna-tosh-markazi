@@ -35,8 +35,8 @@
   margin-top: 30px;
   padding: 18px 22px;
   border: 1px solid var(--border-gold);
-  background: #d4af3708;
-  color: #c5b98d;
+  background: var(--accent-wash);
+  color: var(--text-caption);
   font-size: 12px;
   line-height: 1.8;
 }

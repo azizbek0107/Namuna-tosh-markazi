@@ -10,7 +10,7 @@
 .edition-label {
   font-size: 8px;
   letter-spacing: 2px;
-  color: #a3a3a3;
+  color: var(--text-secondary);
 }
 .home-grid {
   display: grid;
@@ -23,7 +23,7 @@
 .home-kicker {
   font-size: 9px;
   letter-spacing: 3.8px;
-  color: #c5b992;
+  color: var(--text-caption);
   margin-bottom: 23px;
 }
 .home-copy h1 {
@@ -59,7 +59,7 @@
   gap: 12px;
   font-size: 7px;
   letter-spacing: 2px;
-  color: #b5aa8b;
+  color: var(--text-caption);
 }
 .home-caption > span {
   width: 31px;
@@ -232,7 +232,7 @@
   display: flex;
   align-items: center;
   gap: 28px;
-  color: #a7a194;
+  color: var(--text-secondary);
   font-size: 7px;
   line-height: 1.8;
   letter-spacing: 1.6px;
@@ -253,7 +253,7 @@
   padding: 10px 26px;
   border-left: 1px solid var(--border-gold);
   font-size: 11px;
-  color: #c7c1b5;
+  color: var(--text-soft);
   transition: color 0.25s;
 }
 .home-categories > a > svg:first-child {
@@ -261,7 +261,7 @@
 }
 .home-categories > a > svg:last-child {
   margin-left: auto;
-  color: #9f8e5e;
+  color: var(--gold-ink);
 }
 .home-categories > a:hover {
   color: var(--gold-light);

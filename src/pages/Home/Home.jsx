@@ -7,6 +7,7 @@ import {
   SquareStack,
 } from "lucide-react";
 import "./Home.css";
+import ProductCarousel from "../../components/ProductCarousel/ProductCarousel";
 
 export default function Home() {
   return (
@@ -47,26 +48,7 @@ export default function Home() {
             <span /> TABIIY FAKTURA. ZAMONAVIY QARASH.
           </div>
         </div>
-        <div
-          className="stone-scene"
-          role="img"
-          aria-label="Qora va oltin rangdagi tosh plitalarning dizayn konsepti"
-        >
-          <div className="scene-grid" />
-          <div className="scene-circle" />
-          <div className="stone-slab slab-back" />
-          <div className="stone-slab slab-front" />
-          <div className="stone-plinth" />
-          <span className="scene-corner top-left" />
-          <span className="scene-corner bottom-right" />
-          <span className="scene-index">01 — MATERIAL & FORM</span>
-          <div className="scene-label">
-            <span>NAMUNA</span>
-            <b>Timeless by nature.</b>
-            <small>DIZAYN KONSEPTI</small>
-          </div>
-          <ArrowDownRight className="scene-arrow" size={28} strokeWidth={1} />
-        </div>
+        <ProductCarousel />
       </div>
       <div className="home-bottom">
         <span className="home-bottom-label">

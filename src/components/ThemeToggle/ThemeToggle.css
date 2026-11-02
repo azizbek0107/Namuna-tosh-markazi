@@ -1,0 +1,18 @@
+.theme-toggle {
+  flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
+  overflow: hidden;
+}
+.theme-toggle > span {
+  display: grid;
+  place-items: center;
+}
+@media (max-width: 700px) {
+  .navbar-actions {
+    gap: 9px;
+  }
+  .navbar-inner {
+    gap: 12px;
+  }
+}

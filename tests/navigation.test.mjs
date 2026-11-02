@@ -32,12 +32,12 @@ Object.defineProperty(globalThis, "navigator", {
   value: dom.window.navigator,
   configurable: true,
 });
-globalThis.requestAnimationFrame = dom.window.requestAnimationFrame.bind(
-  dom.window,
-);
-globalThis.cancelAnimationFrame = dom.window.cancelAnimationFrame.bind(
-  dom.window,
-);
+// Keep animation frames real while only the carousel's five-second interval is mocked.
+globalThis.requestAnimationFrame = (callback) =>
+  setTimeout(() => callback(performance.now()), 16);
+globalThis.cancelAnimationFrame = clearTimeout;
+window.requestAnimationFrame = globalThis.requestAnimationFrame;
+window.cancelAnimationFrame = globalThis.cancelAnimationFrame;
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 let scrollCalls = 0;
 window.scrollTo = () => {
@@ -75,7 +75,7 @@ const result = await build({
   platform: "node",
   packages: "external",
   jsx: "automatic",
-  loader: { ".css": "empty" },
+  loader: { ".css": "empty", ".jpg": "dataurl" },
 });
 await mkdir(".sites-runtime", { recursive: true });
 const bundle = resolve(".sites-runtime/test-app.mjs");
@@ -93,9 +93,11 @@ async function click(element) {
   });
 }
 async function settle() {
-  await act(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 450));
-  });
+  for (let frame = 0; frame < 3; frame++) {
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 160));
+    });
+  }
 }
 async function key(key, options = {}) {
   await act(async () => {
@@ -110,7 +112,8 @@ async function key(key, options = {}) {
   });
 }
 
-test("routing, order links, mobile focus lifecycle, sticky state and admin separation", async () => {
+test("theme persistence, carousel, routing and accessible mobile navigation", async (t) => {
+  t.mock.timers.enable({ apis: ["setInterval"] });
   const errors = [];
   const originalError = console.error;
   const originalWarn = console.warn;
@@ -126,6 +129,140 @@ test("routing, order links, mobile focus lifecycle, sticky state and admin separ
     });
     await settle();
     assert.match(document.querySelector("h1").textContent, /Mustahkamlik/);
+    assert.equal(
+      document.documentElement.dataset.theme,
+      "light",
+      "First visit uses system preference",
+    );
+    await act(async () => {
+      window.matchMedia("(prefers-color-scheme: dark)").update(true);
+    });
+    assert.equal(
+      document.documentElement.dataset.theme,
+      "dark",
+      "System changes apply before explicit selection",
+    );
+    await act(async () => {
+      window.matchMedia("(prefers-color-scheme: dark)").update(false);
+    });
+    assert.equal(document.documentElement.dataset.theme, "light");
+    await click(document.querySelector(".theme-toggle"));
+    assert.equal(document.documentElement.dataset.theme, "dark");
+    assert.equal(window.localStorage.getItem("namuna-theme"), "dark");
+    assert.match(
+      document.querySelector(".theme-toggle").getAttribute("aria-label"),
+      /Kunduzgi/,
+    );
+    await act(async () => {
+      window.matchMedia("(prefers-color-scheme: dark)").update(false);
+    });
+    assert.equal(
+      document.documentElement.dataset.theme,
+      "dark",
+      "Explicit choice overrides system",
+    );
+    await act(async () => {
+      root.render(createElement(App, { key: "reload-simulation" }));
+    });
+    await settle();
+    assert.equal(
+      document.documentElement.dataset.theme,
+      "dark",
+      "Remount restores stored choice",
+    );
+
+    const currentSlide = () =>
+      document.querySelector(".product-slide").getAttribute("aria-label");
+    assert.equal(
+      document.querySelector(".carousel-view").getAttribute("aria-live"),
+      "off",
+      "Autoplay begins active",
+    );
+    assert.match(currentSlide(), /^1 \/ 3/);
+    assert.ok(
+      document
+        .querySelector(".product-image-frame img")
+        .src.startsWith("data:image/jpeg"),
+    );
+    await act(async () => {
+      t.mock.timers.tick(5000);
+    });
+    await settle();
+    assert.equal(
+      document.querySelector(".carousel-topline>span:last-child").textContent,
+      "02 / 03",
+      "Autoplay updates selected index",
+    );
+    assert.match(currentSlide(), /^2 \/ 3/, "Auto advances after five seconds");
+    const carousel = document.querySelector(".product-carousel");
+    await act(async () => {
+      carousel.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+    });
+    await act(async () => {
+      t.mock.timers.tick(10000);
+    });
+    await settle();
+    assert.match(currentSlide(), /^2 \/ 3/, "Hover suspends auto advance");
+    await act(async () => {
+      carousel.dispatchEvent(new MouseEvent("mouseout", { bubbles: true }));
+    });
+    await click(carousel.querySelector('[aria-label="Keyingi mahsulot"]'));
+    await settle();
+    assert.match(currentSlide(), /^3 \/ 3/);
+    await click(carousel.querySelector('[aria-label="Oldingi mahsulot"]'));
+    await settle();
+    assert.match(currentSlide(), /^2 \/ 3/);
+    await act(async () => {
+      carousel.focus();
+    });
+    await key("Home");
+    await settle();
+    assert.match(currentSlide(), /^1 \/ 3/);
+    await key("End");
+    await settle();
+    assert.match(currentSlide(), /^3 \/ 3/);
+    const viewport = carousel.querySelector(".carousel-view");
+    const touchEvent = (type, property, x, y) => {
+      const event = new Event(type, { bubbles: true });
+      Object.defineProperty(event, property, {
+        value: [{ clientX: x, clientY: y }],
+      });
+      viewport.dispatchEvent(event);
+    };
+    await act(async () => {
+      touchEvent("touchstart", "touches", 200, 100);
+      touchEvent("touchend", "changedTouches", 80, 105);
+    });
+    await settle();
+    assert.match(
+      currentSlide(),
+      /^1 \/ 3/,
+      "Horizontal swipe wraps to first slide",
+    );
+    await click(carousel.querySelector('[aria-label="2-slayd: Angola Black"]'));
+    await settle();
+    assert.match(currentSlide(), /^2 \/ 3/);
+    await act(async () => {
+      t.mock.timers.tick(10000);
+    });
+    await settle();
+    assert.match(
+      currentSlide(),
+      /^2 \/ 3/,
+      "Keyboard focus suspends auto advance",
+    );
+    await click(carousel.querySelector(".carousel-play"));
+    await act(async () => {
+      t.mock.timers.tick(5000);
+    });
+    await settle();
+    assert.match(currentSlide(), /^3 \/ 3/, "Play explicitly resumes rotation");
+    await click(carousel.querySelector(".carousel-play"));
+    await act(async () => {
+      t.mock.timers.tick(10000);
+    });
+    await settle();
+    assert.match(currentSlide(), /^3 \/ 3/, "Pause stops rotation");
     assert.equal(
       document
         .querySelector('.desktop-navigation [aria-current="page"]')
@@ -151,6 +288,7 @@ test("routing, order links, mobile focus lifecycle, sticky state and admin separ
       await settle();
       assert.equal(window.location.pathname, path);
       assert.equal(document.querySelector("h1").textContent, heading);
+      assert.equal(document.documentElement.dataset.theme, "dark");
       assert.equal(
         document
           .querySelector('.desktop-navigation [aria-current="page"]')
@@ -165,6 +303,13 @@ test("routing, order links, mobile focus lifecycle, sticky state and admin separ
     }
     assert.ok(scrollCalls >= 5);
     assert.match(document.title, /Bog‘lanish — Namuna Tosh Markazi/);
+    await click(document.querySelector(".theme-toggle"));
+    assert.equal(document.documentElement.dataset.theme, "light");
+    assert.equal(window.localStorage.getItem("namuna-theme"), "light");
+    assert.match(
+      document.querySelector(".theme-toggle").getAttribute("aria-label"),
+      /Tungi/,
+    );
 
     Object.defineProperty(window, "scrollY", { value: 50, configurable: true });
     await act(async () => {

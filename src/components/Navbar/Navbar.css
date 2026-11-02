@@ -3,7 +3,7 @@
   top: 0;
   z-index: 50;
   height: var(--navbar-height);
-  background: #080808f5;
+  background: var(--navbar-bg);
   border-bottom: 1px solid var(--border);
   transition:
     background 0.35s,
@@ -11,10 +11,10 @@
     border-color 0.35s;
 }
 .navbar-scrolled {
-  background: #080808df;
+  background: var(--navbar-scrolled-bg);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 8px 35px #0000002e;
+  box-shadow: 0 8px 35px var(--ui-shadow);
   border-color: var(--border-gold);
 }
 .navbar-inner {
@@ -40,7 +40,7 @@
   min-height: 48px;
   font-size: 12px;
   font-weight: 500;
-  color: #b3b0a9;
+  color: var(--text-nav);
   white-space: nowrap;
   transition: color 0.25s;
 }
@@ -101,7 +101,7 @@
   top: 0;
   bottom: 0;
   width: min(420px, 100%);
-  background: #0c0c0c;
+  background: var(--panel-bg);
   border-left: 1px solid var(--border-gold);
   display: flex;
   flex-direction: column;
@@ -136,7 +136,7 @@
 }
 .mobile-link-number {
   font-size: 9px;
-  color: #b9a36c;
+  color: var(--text-caption);
 }
 .mobile-panel .nav-link {
   font: 500 21px/1.4 var(--font-heading);
@@ -148,7 +148,7 @@
   bottom: 9px;
 }
 .mobile-panel nav li > svg {
-  color: #9e8852;
+  color: var(--text-caption);
 }
 .mobile-panel-bottom {
   margin-top: auto;
@@ -168,7 +168,7 @@
 .mobile-panel-bottom > span {
   font-size: 9px;
   display: block;
-  color: #aaa399;
+  color: var(--text-secondary);
   margin-top: 20px;
 }
 @media (max-width: 1099px) {

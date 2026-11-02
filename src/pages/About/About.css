@@ -1,4 +1,4 @@
 .about-page .placeholder-art {
   background:
-    linear-gradient(45deg, #d4af3708, transparent), var(--bg-secondary);
+    linear-gradient(45deg, var(--accent-wash), transparent), var(--bg-secondary);
 }

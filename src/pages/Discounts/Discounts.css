@@ -1,5 +1,5 @@
 .discounts-page .placeholder-art {
   background:
-    radial-gradient(ellipse at 70% 20%, #d4af3712, transparent 70%),
+    radial-gradient(ellipse at 70% 20%, var(--accent-wash), transparent 70%),
     var(--bg-secondary);
 }
