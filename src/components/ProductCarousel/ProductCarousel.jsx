@@ -5,7 +5,7 @@ import { heroProducts } from "../../data/heroProducts";
 import ProductSlide from "./ProductSlide";
 import "./ProductCarousel.css";
 
-export default function ProductCarousel() {
+export default function ProductCarousel({ products = heroProducts }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -13,7 +13,7 @@ export default function ProductCarousel() {
   const [hidden, setHidden] = useState(() => document.hidden);
   const touch = useRef(null);
   const reduced = useReducedMotion();
-  const count = heroProducts.length;
+  const count = products.length;
   const playing = !paused && !hovered && !focusPaused && !hidden && !reduced;
   const move = useCallback(
     (step) => setIndex((current) => (current + step + count) % count),
@@ -96,14 +96,14 @@ export default function ProductCarousel() {
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
-            key={heroProducts[index].id}
+            key={products[index].id}
             initial={{ opacity: 0, x: reduced ? 0 : 10 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: reduced ? 0 : -10 }}
             transition={{ duration: reduced ? 0 : 0.18 }}
           >
             <ProductSlide
-              product={heroProducts[index]}
+              product={products[index]}
               index={index}
               count={count}
             />
@@ -134,7 +134,7 @@ export default function ProductCarousel() {
           role="group"
           aria-label="Slaydni tanlash"
         >
-          {heroProducts.map((product, itemIndex) => (
+          {products.map((product, itemIndex) => (
             <button
               type="button"
               key={product.id}

@@ -22,8 +22,9 @@ export default function ProductSlide({ product, index, count }) {
           <img
             src={product.image}
             alt={product.alt}
-            width={index === 0 ? 1188 : 1024}
-            height={index === 0 ? 1324 : 1536}
+            width={product.width}
+            height={product.height}
+            loading="eager"
             fetchPriority={index === 0 ? "high" : "auto"}
             decoding="async"
             draggable="false"

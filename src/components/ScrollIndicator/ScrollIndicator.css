@@ -1,0 +1,28 @@
+.scroll-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  border: 0;
+  min-height: 44px;
+  background: transparent;
+  color: var(--text-secondary);
+  margin: 18px auto 0;
+  padding: 10px 18px;
+  font-size: 8px;
+  letter-spacing: 1.3px;
+  transition: color 0.3s;
+}
+.scroll-indicator > span:last-child {
+  display: grid;
+  place-items: center;
+  color: var(--gold-ink);
+}
+.scroll-indicator:hover {
+  color: var(--gold-light);
+}
+@media (max-width: 767px) {
+  .scroll-indicator {
+    margin-top: 8px;
+  }
+}

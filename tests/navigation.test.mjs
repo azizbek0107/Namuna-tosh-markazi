@@ -40,6 +40,12 @@ window.requestAnimationFrame = globalThis.requestAnimationFrame;
 window.cancelAnimationFrame = globalThis.cancelAnimationFrame;
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 let scrollCalls = 0;
+let scrollTarget;
+let scrollOptions;
+HTMLElement.prototype.scrollIntoView = function (options) {
+  scrollTarget = this;
+  scrollOptions = options;
+};
 window.scrollTo = () => {
   scrollCalls++;
 };
@@ -128,7 +134,63 @@ test("theme persistence, carousel, routing and accessible mobile navigation", as
       root.render(createElement(App));
     });
     await settle();
-    assert.match(document.querySelector("h1").textContent, /Mustahkamlik/);
+    assert.equal(document.querySelectorAll("h1").length, 1);
+    assert.equal(
+      document.querySelector("h1").textContent,
+      "NAMUNA TOSH MARKAZI",
+    );
+    assert.match(
+      document.querySelector(".hero-badge").textContent,
+      /PREMIUM KERAMA GRANIT VA TOSH MAHSULOTLARI/,
+    );
+    assert.equal(
+      document.querySelector(".hero-subtitle").textContent,
+      "Sifat va nafislik uyg‘unligi",
+    );
+    assert.equal(
+      document.querySelector(".hero-primary-cta").getAttribute("href"),
+      "/products",
+    );
+    const heroTelegram = document.querySelector(".hero-secondary-cta");
+    assert.equal(heroTelegram.href, "https://t.me/aura_200707");
+    assert.equal(heroTelegram.target, "_blank");
+    assert.match(heroTelegram.rel, /noopener/);
+    assert.deepEqual(
+      [...document.querySelectorAll(".hero-stat h2")].map(
+        (node) => node.textContent,
+      ),
+      ["Kerama granit", "Sokl va zinapoyalar", "Buyurtma asosida ishlov"],
+    );
+    assert.match(
+      document.querySelector(".product-image-frame img").alt,
+      /Black Crystal/,
+    );
+    assert.equal(
+      document
+        .querySelector(".product-image-frame img")
+        .getAttribute("loading"),
+      "eager",
+    );
+    assert.equal(
+      document
+        .querySelector(".product-image-frame img")
+        .getAttribute("fetchpriority"),
+      "high",
+    );
+    await click(document.querySelector(".scroll-indicator"));
+    assert.equal(scrollTarget.id, "mahsulotlar-preview");
+    assert.equal(scrollOptions.behavior, "smooth");
+    assert.equal(document.activeElement, scrollTarget);
+    await click(document.querySelector(".hero-primary-cta"));
+    await settle();
+    assert.equal(
+      window.location.pathname,
+      "/products",
+      "Hero primary CTA navigates to products",
+    );
+    await click(document.querySelector(".navbar .brand"));
+    await settle();
+    assert.equal(window.location.pathname, "/");
     assert.equal(
       document.documentElement.dataset.theme,
       "light",

@@ -111,3 +111,26 @@ Yangi yoki o‘zgargan fayllar: yuqoridagilardan tashqari `App.jsx`, `main.jsx`,
 
 Carousel accessibility qo‘llanmasi: https://www.w3.org/WAI/ARIA/apg/patterns/carousel/
 Theme qo‘llanmasi: https://developer.chrome.com/docs/modern-web-guidance/guides/ui-components/dark-mode-toggle
+
+## Hero bosqichi
+
+Yaratilgan fayllar:
+
+- `src/components/Hero/Hero.jsx`, `Hero.css`, `HeroContent.jsx`, `HeroVisual.jsx`, `HeroActions.jsx`, `heroMotion.js`.
+- `src/components/HeroStats/HeroStats.jsx`, `HeroStats.css`.
+- `src/components/ScrollIndicator/ScrollIndicator.jsx`, `ScrollIndicator.css`.
+- `src/data/heroData.js`; kelajakdagi rasmlar uchun `src/assets/images/hero/.gitkeep`.
+
+O‘zgartirilgan fayllar: `src/pages/Home/Home.jsx`, `Home.css`, `src/data/heroProducts.js`, `src/components/ProductCarousel/ProductCarousel.jsx`, `ProductSlide.jsx`, `tests/navigation.test.mjs` va ushbu README.
+
+Yangi kutubxona o‘rnatilmadi. Mavjud Motion for React, Lucide, React Router va theme tizimi ishlatiladi. Navbar, boshqa sahifalar va routing o‘zgartirilmadi.
+
+Hero chapida belgilangan o‘zbekcha badge, bitta gradient H1, ikkinchi sarlavha, tavsif va ikkita CTA bor. CTA mahsulotlar sahifasiga va Telegram akkauntiga olib boradi. O‘ngdagi HeroVisual avvalgi carouselni saqlaydi, Black Crystal rasmini birinchi namoyish qiladi. Asl rasmlar qayta ishlanmaydi, `contain` bilan to‘liq ko‘rsatiladi. Rasm o‘lchamlari ma’lumotlarda saqlanadi; birinchi rasm eager/high-priority bilan yuklanadi.
+
+Content stagger/fade/translate animatsiyalari 0.6 soniya, visual kirishi 0.75 soniya. Parallax 4px gorizontal va 3px vertikal bilan cheklangan; faqat sichqonchali ekranlarda ishlaydi. Motion values/springs React’ni har bir pointer siljishida qayta render qilmaydi. Floating/zoom juda yengil; visual ekrandan chiqqanda floating to‘xtaydi. Reduced-motion yoqilganda ushbu harakatlar o‘chadi.
+
+HeroStats uchta haqiqiy yo‘nalishni ko‘rsatadi; tajriba yoki mijoz soniga oid raqamlar yo‘q. ScrollIndicator haqiqiy `mahsulotlar-preview` bo‘limiga scroll qiladi va fokusni o‘tkazadi. Mobile 320–767px da bitta ustun, tablet 768–1023px va desktop 1024px dan boshlab ikki ustun ishlaydi. Qisqa ekranlarda mazmun kesilmasdan tabiiy davom etadi.
+
+Test: bitta H1 va berilgan matnlar, birinchi Black Crystal rasmi, image loading attributlari, CTA orqali `/products`ga haqiqiy navigatsiya, Telegram manzili/target/rel, HeroStats va scroll/fokus; theme, carousel va Navbarning oldingi testlari saqlangan. Brauzer ulanmagani sabab haqiqiy responsive maket va parallax vizual tekshiruvi bajarilmadi.
+
+Motion qo‘llanmasi: https://motion.dev/docs/react-use-spring va https://motion.dev/docs/react-motion-value
