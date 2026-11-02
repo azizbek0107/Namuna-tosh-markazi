@@ -95,13 +95,13 @@
   margin-top: 29px;
   flex-wrap: wrap;
 }
-.hero-primary-cta,
+.hero-actions .hero-primary-cta,
 .hero-secondary-cta {
   min-height: 48px;
   font-size: 10px;
   gap: 12px;
 }
-.hero-primary-cta {
+.hero-actions .hero-primary-cta {
   padding-inline: 17px;
 }
 .hero-secondary-cta {
@@ -119,16 +119,16 @@
     border-color 0.3s,
     color 0.3s;
 }
-.hero-primary-cta svg,
+.hero-actions .hero-primary-cta svg,
 .hero-secondary-cta svg {
   transition: transform 0.3s var(--ease-out);
 }
-.hero-primary-cta:hover,
+.hero-actions .hero-primary-cta:hover,
 .hero-secondary-cta:hover {
   transform: scale(1.025);
   border-color: var(--gold-primary);
 }
-.hero-primary-cta:hover svg:last-of-type,
+.hero-actions .hero-primary-cta:hover svg:last-of-type,
 .hero-secondary-cta:hover svg:last-of-type {
   transform: translate(2px, -2px);
 }
@@ -136,7 +136,7 @@
   background: var(--accent-wash);
   color: var(--gold-light);
 }
-.hero-primary-cta:active,
+.hero-actions .hero-primary-cta:active,
 .hero-secondary-cta:active {
   transform: scale(0.985);
 }
@@ -371,11 +371,11 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-primary-cta:hover,
+  .hero-actions .hero-primary-cta:hover,
   .hero-secondary-cta:hover,
-  .hero-primary-cta:active,
+  .hero-actions .hero-primary-cta:active,
   .hero-secondary-cta:active,
-  .hero-primary-cta:hover svg,
+  .hero-actions .hero-primary-cta:hover svg,
   .hero-secondary-cta:hover svg {
     transform: none;
   }
