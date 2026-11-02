@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/images/namuna-logo.jpg";
+import logo from "../assets/images/namuna-logo-transparent.png";
 
 export default function Brand({ onClick }) {
   return (
@@ -12,7 +12,7 @@ export default function Brand({ onClick }) {
       <img
         className="brand-logo"
         src={logo}
-        width="1609"
+        width="1610"
         height="977"
         alt="Namuna Tosh Jilo logotipi"
       />

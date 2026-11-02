@@ -75,7 +75,7 @@ const result = await build({
   platform: "node",
   packages: "external",
   jsx: "automatic",
-  loader: { ".css": "empty", ".jpg": "dataurl" },
+  loader: { ".css": "empty", ".jpg": "dataurl", ".png": "dataurl" },
 });
 await mkdir(".sites-runtime", { recursive: true });
 const bundle = resolve(".sites-runtime/test-app.mjs");

@@ -1,0 +1,5 @@
+Mode: built-in image_gen edit; transparent_background=true
+Source: src/assets/images/namuna-logo.jpg
+Saved asset: src/assets/images/namuna-logo-transparent.png
+
+Use case: background-extraction. Edit target: the supplied existing NTJ Namuna Tosh Jilo logo. Remove ONLY the white/off-white background, including all white areas inside the gold rounded rectangular frame, around and between the letters and the lower text. Output a genuine transparent alpha PNG cutout. Preserve the original gold rounded frame, exact black-and-gold NTJ letter shapes, metallic highlights, original colors, proportions, and exact text 'Namuna Tosh Jilo'. Do not redesign, relight, change spelling, add details, or substitute a different logo. Maintain the same wide composition and all logo contents, clean anti-aliased edges without white halos. Background must be transparent, not checkerboard painted into pixels.
