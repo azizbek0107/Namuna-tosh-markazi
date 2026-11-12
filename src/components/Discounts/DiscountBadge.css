@@ -1,0 +1,2 @@
+.discount-badge { display: inline-flex; max-width: 100%; box-shadow: 0 3px 14px var(--ui-shadow); }
+.discount-badge .product-discount-badge { background: var(--bg-secondary); color: var(--gold-ink); border-color: var(--gold-primary); font-variant-numeric: tabular-nums; line-height: 1.5; }

@@ -1,0 +1,314 @@
+/* OrderButton.css — trigger button & inline quantity input for order */
+
+.order-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 13px 22px;
+  color: var(--button-text);
+  background-color: var(--button-bg);
+  background-image: linear-gradient(115deg, #ffffff12, transparent);
+  border: 1px solid var(--button-border);
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 650;
+  font-family: var(--font-body);
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.3s var(--ease-out),
+    box-shadow 0.3s,
+    background-color 0.3s;
+}
+.order-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 25%, #ffffff35 50%, transparent 75%);
+  transform: translateX(-120%);
+  transition: transform 0.6s var(--ease-out);
+  pointer-events: none;
+}
+.order-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 28px #d4af3725;
+  background-color: var(--button-hover);
+}
+.order-btn:hover::before {
+  transform: translateX(120%);
+}
+.order-btn:active {
+  transform: translateY(0);
+}
+
+/* In-cart state for Order Button (Buyurtmaga saqlangan mahsulot tugmasi) */
+.order-btn--in-cart {
+  background: #10b981 !important;
+  border-color: #34d399 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35) !important;
+}
+
+.order-btn--in-cart:hover {
+  background: #059669 !important;
+  border-color: #10b981 !important;
+  transform: translateY(-2px);
+}
+
+:root[data-theme="light"] .order-btn--in-cart,
+[data-theme="light"] .order-btn--in-cart {
+  background: #16a34a !important;
+  border-color: #15803d !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25) !important;
+}
+
+:root[data-theme="light"] .order-btn--in-cart:hover,
+[data-theme="light"] .order-btn--in-cart:hover {
+  background: #15803d !important;
+}
+
+/* Full-width variant for use inside card actions */
+.order-btn--full {
+  width: 100%;
+}
+
+/* Compact variant for tight spaces */
+.order-btn--compact {
+  min-height: 40px;
+  padding: 9px 16px;
+  font-size: 11px;
+}
+
+/* ── Inline Quantity Form (Tugmaning o'rniga ochiladigan miqdor kiritish oynasi) ── */
+.order-qty-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+  padding: 4px 6px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+  box-shadow: 0 4px 18px var(--ui-shadow, rgba(0, 0, 0, 0.25));
+  animation: order-qty-appear 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.order-qty-inline.order-btn--full {
+  width: 100%;
+}
+
+.order-qty-inline.order-btn--compact {
+  min-height: 40px;
+  padding: 3px 5px;
+}
+
+@keyframes order-qty-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.order-qty-input-group {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0 8px;
+  flex: 1;
+  min-width: 0;
+  height: 38px;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s ease;
+}
+
+.order-qty-inline.order-btn--compact .order-qty-input-group {
+  height: 32px;
+  padding: 0 6px;
+}
+
+.order-qty-input-group:focus-within {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 1px var(--gold-primary);
+}
+
+/* Numeric input — scroll wheel strictly disabled, spin buttons removed */
+.order-qty-input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  outline: none;
+  padding: 0;
+  -moz-appearance: textfield;
+}
+
+.order-qty-input::-webkit-outer-spin-button,
+.order-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.order-qty-unit {
+  font-size: 11px;
+  color: var(--gold-ink);
+  font-weight: 600;
+  margin-left: 4px;
+  flex-shrink: 0;
+  text-transform: lowercase;
+}
+
+/* Confirm "Savatga" button */
+.order-qty-confirm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 38px;
+  padding: 0 12px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 1px solid var(--button-border);
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.order-qty-inline.order-btn--compact .order-qty-confirm-btn {
+  height: 32px;
+  padding: 0 8px;
+  font-size: 10px;
+}
+
+.order-qty-confirm-btn:hover:not(:disabled) {
+  background: var(--button-hover);
+  transform: translateY(-1px);
+}
+
+.order-qty-confirm-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.order-qty-check-icon {
+  color: #10b981;
+}
+
+/* Cancel '✕' button */
+.order-qty-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 38px;
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.order-qty-inline.order-btn--compact .order-qty-cancel-btn {
+  width: 26px;
+  height: 32px;
+}
+
+.order-qty-cancel-btn:hover {
+  color: var(--text-primary);
+  background: rgba(128, 128, 128, 0.15);
+}
+
+/* ── Light Mode (Kunduzgi: fon sayt foni bilan bir xil #ffffff, yozuv qora #000000) ── */
+:root[data-theme="light"] .order-qty-inline,
+[data-theme="light"] .order-qty-inline {
+  background-color: #ffffff;
+  border-color: var(--border-gold, #a67c2445);
+}
+
+:root[data-theme="light"] .order-qty-input-group,
+[data-theme="light"] .order-qty-input-group {
+  background-color: #f8f7f3;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="light"] .order-qty-input,
+[data-theme="light"] .order-qty-input {
+  color: #000000;
+}
+
+:root[data-theme="light"] .order-qty-input::placeholder,
+[data-theme="light"] .order-qty-input::placeholder {
+  color: #666666;
+}
+
+:root[data-theme="light"] .order-qty-unit,
+[data-theme="light"] .order-qty-unit {
+  color: #805b17;
+}
+
+:root[data-theme="light"] .order-qty-cancel-btn,
+[data-theme="light"] .order-qty-cancel-btn {
+  color: #000000;
+}
+
+/* ── Dark Mode (Tungi: fon sayt foni bilan bir xil #141414, yozuv oq #ffffff) ── */
+:root[data-theme="dark"] .order-qty-inline,
+[data-theme="dark"] .order-qty-inline,
+:root:not([data-theme="light"]) .order-qty-inline {
+  background-color: #141414;
+  border-color: var(--border-gold, #d4af3740);
+}
+
+:root[data-theme="dark"] .order-qty-input-group,
+[data-theme="dark"] .order-qty-input-group,
+:root:not([data-theme="light"]) .order-qty-input-group {
+  background-color: #080808;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme="dark"] .order-qty-input,
+[data-theme="dark"] .order-qty-input,
+:root:not([data-theme="light"]) .order-qty-input {
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .order-qty-input::placeholder,
+[data-theme="dark"] .order-qty-input::placeholder,
+:root:not([data-theme="light"]) .order-qty-input::placeholder {
+  color: #a3a3a3;
+}
+
+:root[data-theme="dark"] .order-qty-unit,
+[data-theme="dark"] .order-qty-unit,
+:root:not([data-theme="light"]) .order-qty-unit {
+  color: #d4af37;
+}
+
+:root[data-theme="dark"] .order-qty-cancel-btn,
+[data-theme="dark"] .order-qty-cancel-btn,
+:root:not([data-theme="light"]) .order-qty-cancel-btn {
+  color: #ffffff;
+}

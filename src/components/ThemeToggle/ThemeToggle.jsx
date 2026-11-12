@@ -1,13 +1,15 @@
+import useLanguage from '../../hooks/useLanguage';
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Moon, Sun } from "lucide-react";
 import useTheme from "../../hooks/useTheme";
 import "./ThemeToggle.css";
 
 export default function ThemeToggle() {
+  const { t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const reduced = useReducedMotion();
   const label =
-    theme === "dark" ? "Kunduzgi rejimga o‘tish" : "Tungi rejimga o‘tish";
+    theme === "dark" ? t('theme.light') : t('theme.dark');
   const Icon = theme === "dark" ? Sun : Moon;
   return (
     <button

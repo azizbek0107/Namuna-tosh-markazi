@@ -1,8 +1,10 @@
+import { TELEGRAM_URL } from '../../config/contactConfig.js';
+
 export const navigation = [
-  { to: "/", label: "Bosh sahifa" },
-  { to: "/products", label: "Mahsulotlar" },
-  { to: "/discounts", label: "Chegirmalar" },
-  { to: "/about", label: "Biz haqimizda" },
-  { to: "/contact", label: "Bog‘lanish" },
+  { to: "/", label: "Bosh sahifa", translationKey: "nav.home" },
+  { to: "/products", label: "Mahsulotlar", translationKey: "nav.products" },
+  { to: "/discounts", label: "Chegirmalar", translationKey: "nav.discounts" },
+  { to: "/about", label: "Biz haqimizda", translationKey: "nav.about" },
 ];
-export const orderUrl = "https://t.me/aura_200707";
+// Single source of truth — imported from contactConfig
+export const orderUrl = TELEGRAM_URL;

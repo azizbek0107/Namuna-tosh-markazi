@@ -1,0 +1,18 @@
+# ==============================================================================
+# robots.txt — Namuna Tosh Markazi (https://namunatosh.uz)
+# ==============================================================================
+User-agent: *
+Allow: /
+Allow: /products
+Allow: /products/*
+Allow: /discounts
+Allow: /about
+Allow: /contact
+
+# Disallow private administrative and authentication routes
+Disallow: /admin
+Disallow: /admin/*
+
+# Sitemap declaration
+Sitemap: https://namunatosh.uz/sitemap.xml
+

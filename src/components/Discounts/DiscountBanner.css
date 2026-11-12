@@ -1,0 +1,8 @@
+.discount-banner { margin-block: 32px; border: 1px solid var(--border-gold); background: linear-gradient(105deg, var(--accent-wash), var(--bg-secondary)); }
+.discount-banner>a { display: flex; align-items: center; gap: 24px; padding: 25px; color: var(--gold-ink); min-height: 100px; }
+.discount-banner>a>svg:last-child { margin-left: auto; }
+.discount-banner span { font-size: 8px; letter-spacing: 1.8px; }
+.discount-banner strong { display: block; font: 500 23px/1.4 var(--font-heading); margin-top: 7px; }
+.discount-banner p { color: var(--text-secondary); font-size: 11px; line-height: 1.7; margin-top: 7px; }
+.discount-banner:hover { border-color: var(--gold-primary); }
+@media (max-width: 600px) { .discount-banner>a { padding: 20px 15px; gap: 14px; } .discount-banner strong { font-size: 19px; } }

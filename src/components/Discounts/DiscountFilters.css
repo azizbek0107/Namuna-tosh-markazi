@@ -1,0 +1,17 @@
+.discount-filter-column { min-width: 0; }
+.discount-filter-toggle { display: none; }
+.discount-filters { border-top: 1px solid var(--border-gold); }
+.discount-filter-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.discount-filter-heading>span { font-size: 10px; letter-spacing: 1.2px; color: var(--gold-ink); }
+.discount-filter-heading button { display: flex; align-items: center; gap: 7px; min-height: 44px; font-size: 10px; border: 0; color: var(--text-secondary); background: transparent; padding: 6px 0; }
+.discount-filters fieldset { border: 0; border-bottom: 1px solid var(--border); padding: 20px 0; margin: 0; min-width: 0; }
+.discount-filters legend { float: left; width: 100%; margin-bottom: 12px; font-size: 12px; }
+.discount-filters legend+* { clear: both; }
+.discount-category, .discount-type { display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 11px; line-height: 1.5; color: var(--text-secondary); cursor: pointer; }
+.discount-filters input { accent-color: var(--gold-primary); flex-shrink: 0; }
+.discount-category:has(input:checked), .discount-type:has(input:checked) { color: var(--gold-ink); }
+.discount-category small { margin-left: auto; border: 1px solid var(--border); padding: 2px 5px; font-size: 9px; }
+.discount-sort { display: grid; gap: 12px; margin-top: 20px; font-size: 12px; }
+.discount-sort select { min-width: 0; width: 100%; min-height: 48px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); padding: 10px 7px; font-size: 11px; }
+.discount-filters>p { margin-top: 20px; font-size: 10px; line-height: 1.9; color: var(--text-secondary); }
+@media (max-width: 1023px) { .discount-filter-toggle { display: flex; align-items: center; gap: 12px; min-height: 48px; width: 100%; background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-gold); padding: 12px 15px; font-size: 12px; } .discount-filter-toggle>svg:last-child { margin-left: auto; transition: transform .25s; } .discount-filter-toggle[aria-expanded=true]>svg:last-child { transform: rotate(180deg); } .discount-filters { display: none; border: 1px solid var(--border); border-top: 0; padding: 0 17px 20px; background: var(--bg-secondary); } .discount-filters.is-open { display: block; } }

@@ -1,0 +1,135 @@
+/* TelegramOrderActions.css — copy + open Telegram action buttons */
+
+.toa-root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Message preview textarea */
+.toa-preview-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+}
+
+.toa-preview-textarea {
+  padding: 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-primary);
+  font: 400 12px/1.7 monospace;
+  resize: vertical;
+  min-height: 200px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.toa-preview-textarea:focus {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 0;
+}
+
+/* Buttons row */
+.toa-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.toa-copy-btn {
+  flex: 1;
+  min-width: 150px;
+  min-height: 50px;
+  padding: 13px 18px;
+  background: var(--button-bg);
+  background-image: linear-gradient(115deg, #ffffff12, transparent);
+  border: 1px solid var(--button-border);
+  border-radius: 2px;
+  color: var(--button-text);
+  font: 650 12px/1 var(--font-body);
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.25s, transform 0.2s, box-shadow 0.25s;
+}
+.toa-copy-btn:hover {
+  background-color: var(--button-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px #d4af3722;
+}
+.toa-copy-btn:active { transform: translateY(0); }
+.toa-copy-btn.is-copied {
+  background: #2a6b2e;
+  border-color: #3a8840;
+  color: #d1f0d4;
+}
+
+.toa-telegram-btn {
+  flex: 1;
+  min-width: 150px;
+  min-height: 50px;
+  padding: 13px 18px;
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+  color: var(--gold-primary);
+  font: 650 12px/1 var(--font-body);
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.toa-telegram-btn:hover {
+  background: var(--accent-wash);
+  transform: translateY(-1px);
+}
+.toa-telegram-btn:active { transform: translateY(0); }
+
+/* Status / instruction text */
+.toa-status {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+  padding: 10px 14px;
+  border-left: 2px solid var(--border-gold);
+}
+.toa-status.is-copied {
+  color: #6abf6e;
+  border-left-color: #6abf6e;
+}
+.toa-status.is-failed {
+  color: #e09050;
+  border-left-color: #e09050;
+}
+
+/* Manual copy fallback */
+.toa-fallback-note {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .toa-buttons {
+    flex-direction: column;
+  }
+  .toa-copy-btn,
+  .toa-telegram-btn {
+    min-width: unset;
+    width: 100%;
+  }
+}
+

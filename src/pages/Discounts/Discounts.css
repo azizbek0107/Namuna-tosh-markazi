@@ -1,5 +1,15 @@
-.discounts-page .placeholder-art {
-  background:
-    radial-gradient(ellipse at 70% 20%, var(--accent-wash), transparent 70%),
-    var(--bg-secondary);
-}
+.discounts-page { padding-block: 38px 65px; }
+.discounts-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); align-items: start; gap: 35px; margin-top: 35px; }
+.discounts-results { min-width: 0; }
+.discounts-result-count { font-size: 11px; color: var(--text-secondary); margin: 0 0 22px; min-height: 16px; }
+.discount-empty { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 50px 22px; min-height: 350px; border: 1px solid var(--border); background: var(--bg-secondary); text-align: center; }
+.discount-empty>svg { color: var(--gold-ink); margin-bottom: 25px; }
+.discount-empty h2 { font: 500 clamp(23px, 2.5vw, 30px)/1.4 var(--font-heading); letter-spacing: -.7px; max-width: 450px; }
+.discount-empty p { color: var(--text-secondary); font-size: 12px; line-height: 1.9; max-width: 400px; margin-top: 18px; }
+.discount-empty .gold-button { margin-top: 26px; }
+.discount-clear-button { min-height: 48px; border: 1px solid var(--border-gold); background: var(--accent-wash); color: var(--gold-ink); font-size: 11px; padding: 12px 17px; margin-top: 20px; }
+.discounts-footnote, .discount-expiry-notice { color: var(--text-secondary); font-size: 10px; line-height: 1.9; margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border); }
+.discount-expiry-notice { margin: 0 0 20px; padding: 14px; border: 1px solid var(--border-gold); color: var(--gold-ink); }
+@media (max-width: 1199px) { .discounts-layout { grid-template-columns: 200px minmax(0, 1fr); gap: 25px; } }
+@media (max-width: 1023px) { .discounts-layout { grid-template-columns: 1fr; gap: 24px; } }
+@media (max-width: 600px) { .discounts-page { padding-block: 25px 45px; } .discounts-layout { margin-top: 24px; } .discount-empty { padding: 35px 17px; } .discount-empty p { font-size: 11px; } }

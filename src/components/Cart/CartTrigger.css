@@ -1,0 +1,41 @@
+/* ==============================================================================
+   CartTrigger.css — Shopping Cart Icon Button in Navbar
+   Styled identically to .icon-button & .theme-toggle for visual harmony
+   ============================================================================== */
+
+.cart-trigger-btn {
+  position: relative;
+  flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.cart-trigger-btn > svg {
+  display: block;
+}
+
+.cart-trigger-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  padding: 0 4px;
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  line-height: 1;
+  pointer-events: none;
+  animation: badge-pop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes badge-pop {
+  0% { transform: scale(0.4); }
+  100% { transform: scale(1); }
+}

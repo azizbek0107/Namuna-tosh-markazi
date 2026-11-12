@@ -1,0 +1,8 @@
+/* AdminProducts.css */
+
+.admin-products-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+

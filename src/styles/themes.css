@@ -1,3 +1,11 @@
+/* Change every surface and label in one paint; restore hover transitions after. */
+html[data-theme-switching="true"],
+html[data-theme-switching="true"] *,
+html[data-theme-switching="true"] *::before,
+html[data-theme-switching="true"] *::after {
+  transition: none !important;
+}
+
 :root,
 :root[data-theme="dark"] {
   color-scheme: dark;

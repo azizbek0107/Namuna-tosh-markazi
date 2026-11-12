@@ -12,7 +12,7 @@ export default function Admin() {
         tomonidagi autentifikatsiya keyingi bosqichda qo‘shiladi.
       </p>
       <div className="admin-notice">
-        Ushbu sahifa hozir himoyalanmagan. Bu yerda maxfiy ma’lumotlar yoki
+        Ushbu sahifa hozir himoyalanmagan. Bu yerda maxfiy ma‘lumotlar yoki
         boshqaruv amallari mavjud emas.
       </div>
     </section>

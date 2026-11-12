@@ -1,8 +1,10 @@
+import useLanguage from '../../hooks/useLanguage';
 import { ArrowDown } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import "./ScrollIndicator.css";
 
 export default function ScrollIndicator({ targetId }) {
+  const { t } = useLanguage();
   const reduced = useReducedMotion();
   function scroll() {
     const target = document.getElementById(targetId);
@@ -20,7 +22,7 @@ export default function ScrollIndicator({ targetId }) {
       onClick={scroll}
       aria-controls={targetId}
     >
-      <span>Pastga aylantiring</span>
+      <span>{t('common.scroll')}</span>
       <motion.span
         aria-hidden="true"
         animate={reduced ? { y: 0 } : { y: [0, 4, 0] }}

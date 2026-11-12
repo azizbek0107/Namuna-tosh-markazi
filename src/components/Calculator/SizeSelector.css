@@ -1,0 +1,8 @@
+.calculator-sizes { border: 0; padding: 0; margin: 24px 0; min-width: 0; }
+.calculator-sizes legend { color: var(--text-primary); font-size: 12px; margin-bottom: 12px; }
+.calculator-size-options { display: flex; gap: 10px; flex-wrap: wrap; }
+.calculator-size-options label { display: flex; align-items: center; gap: 9px; min-height: 48px; padding: 12px; border: 1px solid var(--border); background: var(--bg-primary); cursor: pointer; color: var(--text-secondary); font-size: 11px; transition: border-color .25s, background-color .25s; }
+.calculator-size-options label.is-selected { border-color: var(--gold-primary); background: var(--accent-wash); color: var(--gold-ink); }
+.calculator-size-options input { accent-color: var(--gold-primary); }
+.calculator-sizes p { font-size: 11px; line-height: 1.8; color: var(--gold-ink); }
+.calculator-sizes p span { color: var(--text-secondary); }

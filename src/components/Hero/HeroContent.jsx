@@ -3,11 +3,21 @@ import { Check, Sparkles } from "lucide-react";
 import { heroData } from "../../data/heroData";
 import HeroActions from "./HeroActions";
 import { revealItem } from "./heroMotion";
+import useLanguage from "../../hooks/useLanguage";
 
 export default function HeroContent() {
   const reduced = useReducedMotion();
+  const { t } = useLanguage();
   const item = revealItem(reduced);
   const [brand, ...title] = heroData.title.split(" ");
+  const badgeText = t('hero.badge', heroData.badge);
+  const subtitleText = t('hero.subtitle', heroData.subtitle);
+  const descText = t('hero.description', heroData.description);
+  const trustItems = [
+    t('hero.trust_1', heroData.trust[0]),
+    t('hero.trust_2', heroData.trust[1]),
+  ];
+
   return (
     <motion.div
       className="hero-content"
@@ -24,20 +34,20 @@ export default function HeroContent() {
     >
       <motion.div className="hero-badge" variants={item}>
         <Sparkles size={12} strokeWidth={1.5} aria-hidden="true" />
-        <span>{heroData.badge}</span>
+        <span>{badgeText}</span>
       </motion.div>
       <motion.h1 id="hero-title" className="hero-title" variants={item}>
-        <span>{brand}</span> <span>{title.join(" ")}</span>
+        <span>{t('hero.title_brand', brand)}</span> <span>{t('hero.title_rest', title.join(' '))}</span>
       </motion.h1>
       <motion.p className="hero-subtitle" variants={item}>
-        {heroData.subtitle}
+        {subtitleText}
       </motion.p>
       <motion.p className="hero-description" variants={item}>
-        {heroData.description}
+        {descText}
       </motion.p>
       <HeroActions />
       <motion.ul className="hero-trust" variants={item}>
-        {heroData.trust.map((text) => (
+        {trustItems.map((text) => (
           <li key={text}>
             <Check size={13} strokeWidth={1.5} aria-hidden="true" />
             {text}

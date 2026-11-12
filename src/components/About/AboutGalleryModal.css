@@ -1,0 +1,15 @@
+.about-lightbox-layer { position: fixed; inset: 0; z-index: 180; display: grid; place-items: center; padding: 22px; background: var(--navbar-bg); overflow-y: auto; overscroll-behavior: contain; }
+.about-lightbox { width: min(850px, 100%); min-width: 0; padding: 20px; border: 1px solid var(--border-gold); background: var(--bg-secondary); box-shadow: 0 15px 50px var(--ui-shadow); max-height: calc(100dvh - 44px); overflow-y: auto; }
+.about-lightbox-header { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+.about-lightbox-header h2 { font: 500 19px/1.4 var(--font-heading); letter-spacing: -.5px; }
+.about-lightbox figure { margin: 16px 0 0; }
+.about-lightbox-stage { height: min(57dvh, 560px); min-height: 160px; display: grid; place-items: center; background: var(--image-stage); padding: 15px; }
+.about-lightbox-stage img { width: 100%; height: 100%; object-fit: contain; max-height: calc(min(57dvh, 560px) - 30px); display: block; }
+.about-lightbox-stage .catalog-image-placeholder { min-height: 0; }
+.about-lightbox figcaption { display: flex; align-items: center; justify-content: space-between; gap: 15px; font-size: 12px; margin-top: 15px; color: var(--gold-ink); }
+.about-lightbox-count { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.about-lightbox-controls { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 17px; border-top: 1px solid var(--border); padding-top: 15px; }
+.about-lightbox-controls p { text-align: center; color: var(--text-secondary); font-size: 10px; line-height: 1.7; }
+.about-lightbox button { min-width: 46px; min-height: 46px; }
+.about-lightbox button:disabled { opacity: .4; cursor: default; }
+@media (max-width: 600px) { .about-lightbox-layer { padding: 10px; } .about-lightbox { padding: 14px; max-height: calc(100dvh - 20px); } .about-lightbox-header h2 { font-size: 17px; } .about-lightbox-stage { padding: 10px; } .about-lightbox-stage img { max-height: calc(min(57dvh, 560px) - 20px); } .about-lightbox-controls { gap: 9px; } .about-lightbox-controls p { font-size: 9px; } }

@@ -1,0 +1,65 @@
+/* AdminCategories.css */
+
+.admin-categories-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.admin-page-title-group h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+}
+
+.admin-page-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.category-table-wrapper {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+
+.category-table th {
+  padding: 14px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: var(--accent-wash);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.category-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.category-table tr:hover td {
+  background: var(--accent-wash);
+}
+

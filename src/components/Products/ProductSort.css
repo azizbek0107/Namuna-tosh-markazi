@@ -1,0 +1,207 @@
+/* ==============================================================================
+   ProductSort.css — Luxury Styled Sort Trigger & Dropdown Window
+   ============================================================================== */
+
+.product-sort {
+  position: relative;
+  display: inline-flex;
+  min-height: 50px;
+}
+
+/* Hidden accessible select element for test suites and screen readers */
+.product-sort-native-select {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Main Trigger Button */
+.product-sort-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 50px;
+  width: 100%;
+  padding: 0 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.product-sort-btn:hover,
+.product-sort-btn.is-active {
+  border-color: var(--border-gold);
+  background: var(--surface-hover, rgba(212, 175, 55, 0.05));
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.product-sort-prefix {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 500;
+}
+
+.product-sort-prefix .sort-icon {
+  color: var(--gold-ink);
+}
+
+.product-sort-value {
+  color: var(--gold-light);
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.sort-chevron {
+  margin-left: auto;
+  color: var(--gold-ink);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sort-chevron.is-rotated {
+  transform: rotate(180deg);
+  color: var(--gold-primary);
+}
+
+/* ==============================================================================
+   Dropdown Window (Ochilib turuvchi oyna)
+   ============================================================================== */
+
+.product-sort-window {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 260px;
+  background: var(--panel-bg, #111111);
+  border: 1px solid var(--border-gold);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.75),
+    0 0 24px rgba(212, 175, 55, 0.12);
+  border-radius: 3px;
+  z-index: 70;
+  overflow: hidden;
+  animation: sort-window-slide 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+@keyframes sort-window-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.product-sort-window-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.product-sort-window-head > span:first-child {
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  font-weight: 700;
+  color: var(--gold-ink);
+  text-transform: uppercase;
+}
+
+.sort-count-badge {
+  font-size: 9px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.product-sort-window-list {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 0;
+}
+
+.product-sort-window-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 16px;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 11.5px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  width: 100%;
+}
+
+.product-sort-window-item:hover {
+  background: var(--accent-wash);
+  color: var(--gold-light);
+  border-left-color: var(--gold-primary);
+  padding-left: 19px;
+}
+
+.product-sort-window-item.is-selected {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--gold-primary);
+  font-weight: 600;
+  border-left-color: var(--gold-primary);
+}
+
+.sort-item-text {
+  flex: 1;
+}
+
+.sort-item-check {
+  color: var(--gold-primary);
+  flex-shrink: 0;
+}
+
+/* ==============================================================================
+   Mobile Responsiveness
+   ============================================================================== */
+
+@media (max-width: 700px) {
+  .product-sort {
+    width: 100%;
+  }
+
+  .product-sort-btn {
+    justify-content: space-between;
+  }
+
+  .product-sort-window {
+    left: 0;
+    right: 0;
+    min-width: unset;
+    width: 100%;
+  }
+}

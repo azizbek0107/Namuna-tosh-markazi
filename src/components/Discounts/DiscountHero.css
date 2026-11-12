@@ -1,0 +1,10 @@
+.discount-hero { position: relative; overflow: hidden; padding: 45px 40px 35px; border: 1px solid var(--border-gold); background: radial-gradient(ellipse at 85% 20%, var(--accent-wash), transparent 65%), var(--bg-secondary); }
+.discount-hero h1 { font: 600 clamp(29px, 4.3vw, 58px)/1.15 var(--font-heading); letter-spacing: -1.5px; margin-top: 22px; color: var(--gold-ink); background: linear-gradient(105deg, var(--gold-ink), var(--gold-light)); background-clip: text; -webkit-text-fill-color: transparent; position: relative; }
+.discount-hero h2 { font: 500 clamp(20px, 2.5vw, 29px)/1.4 var(--font-heading); margin-top: 16px; position: relative; max-width: 650px; }
+.discount-hero p { color: var(--text-secondary); font-size: 12px; line-height: 1.9; margin-top: 18px; max-width: 500px; position: relative; }
+.discount-hero-status { margin-top: 25px; color: var(--gold-ink); font-size: 10px; letter-spacing: .6px; }
+.discount-hero-line { height: 1px; background: linear-gradient(90deg, var(--gold-primary), var(--border-gold), transparent); margin-top: 28px; transform-origin: left; }
+.discount-hero-geometry { position: absolute; width: 235px; height: 235px; border: 1px solid var(--border-gold); right: -40px; top: -40px; transform: rotate(30deg); display: grid; place-items: center; color: var(--border-gold); }
+.discount-hero-geometry::before { content: ''; position: absolute; inset: 20px; border: 1px solid var(--border-gold); }
+.discount-hero-geometry svg { width: 110px; height: 110px; transform: rotate(-30deg); }
+@media (max-width: 600px) { .discount-hero { padding: 30px 19px 22px; } .discount-hero h1 { letter-spacing: -.8px; } .discount-hero-geometry { opacity: .5; right: -120px; } .discount-hero p { font-size: 11px; } }

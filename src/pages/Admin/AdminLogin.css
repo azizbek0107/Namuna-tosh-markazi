@@ -1,0 +1,68 @@
+/* AdminLogin.css */
+
+.admin-login-page {
+  min-height: calc(100svh - 160px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.admin-login-card {
+  width: min(440px, 100%);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+  padding: 42px 36px 36px;
+  box-shadow:
+    0 12px 50px #00000050,
+    0 0 0 1px var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.admin-login-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-login-brand {
+  font: 700 13px/1.2 var(--font-heading);
+  letter-spacing: 3px;
+  color: var(--gold-primary);
+  text-transform: uppercase;
+}
+
+.admin-login-title {
+  font: 600 22px/1.2 var(--font-heading);
+  letter-spacing: -0.6px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.admin-login-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.admin-config-warning {
+  padding: 12px 14px;
+  background: #d4af3715;
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+  color: var(--gold-primary);
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .admin-login-card {
+    padding: 30px 20px 24px;
+  }
+}
+

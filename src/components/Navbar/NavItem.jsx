@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { motion } from "motion/react";
+import useLanguage from "../../hooks/useLanguage";
 
 export default function NavItem({ item, onClick }) {
+  const { t } = useLanguage();
+  const label = item.translationKey ? t(item.translationKey, item.label) : item.label;
+
   return (
     <NavLink
       to={item.to}
@@ -11,7 +15,7 @@ export default function NavItem({ item, onClick }) {
     >
       {({ isActive }) => (
         <>
-          <span>{item.label}</span>
+          <span>{label}</span>
           {isActive && (
             <motion.span
               className="active-indicator"

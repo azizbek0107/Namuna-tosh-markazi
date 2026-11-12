@@ -1,0 +1,368 @@
+/* ==============================================================================
+   QuantityModal.css — Premium Black & Gold Quantity Input Modal
+   ============================================================================== */
+
+.qm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  z-index: 1100;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.qm-dialog {
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-gold);
+  border-radius: 8px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6), 0 0 24px var(--accent-wash);
+  padding: 24px;
+  color: var(--text-primary);
+  position: relative;
+}
+
+/* Header */
+.qm-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 14px;
+}
+
+.qm-category {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gold-primary);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.qm-title {
+  font: 600 clamp(18px, 2vw, 22px)/1.2 var(--font-heading);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.qm-close-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.qm-close-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--gold-primary);
+  background: var(--accent-wash);
+}
+
+/* Product row */
+.qm-product-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.qm-thumb {
+  width: 58px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.qm-product-meta {
+  flex: 1;
+}
+
+.qm-unit-price {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.qm-unit-price strong {
+  font-size: 16px;
+  color: var(--gold-primary);
+}
+
+.qm-inquiry {
+  color: var(--gold-light);
+  font-style: italic;
+  font-size: 13px;
+}
+
+.qm-stock-status {
+  font-size: 11px;
+  color: #4ade80;
+  margin: 4px 0 0 0;
+}
+
+/* Form & fields */
+.qm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.qm-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qm-field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Size pills */
+.qm-sizes-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.qm-size-pill {
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.qm-size-pill:hover {
+  border-color: var(--gold-light);
+  color: var(--text-primary);
+}
+
+.qm-size-pill.is-selected {
+  background: var(--accent-wash);
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+}
+
+/* Mode switch */
+.qm-mode-switch {
+  display: flex;
+  background: var(--bg-secondary);
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.qm-mode-btn {
+  flex: 1;
+  padding: 7px 10px;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.qm-mode-btn.is-active {
+  background: var(--gold-primary);
+  color: #0b0b0b;
+  font-weight: 700;
+}
+
+/* Stepper (No scroll / range slider) */
+.qm-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-gold);
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.qm-step-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--accent-wash);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--gold-primary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.qm-step-btn:hover:not(:disabled) {
+  background: var(--gold-primary);
+  color: #0b0b0b;
+}
+
+.qm-step-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.qm-qty-input {
+  flex: 1;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-family: monospace;
+}
+
+/* Presets */
+.qm-presets {
+  display: flex;
+  gap: 6px;
+}
+
+.qm-preset-btn {
+  flex: 1;
+  padding: 5px 8px;
+  font-size: 11px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.qm-preset-btn:hover {
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+}
+
+.qm-equivalent {
+  font-size: 11px;
+  color: var(--gold-ink);
+  margin: 2px 0 0 0;
+}
+
+/* Calc summary */
+.qm-calc-summary {
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border-gold);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.qm-calc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.qm-calc-total {
+  font-size: 18px;
+  color: var(--gold-primary);
+}
+
+.qm-discount-line {
+  font-size: 11px;
+  color: #4ade80;
+  margin-top: 4px;
+}
+
+/* Actions */
+.qm-actions {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.qm-cancel-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.qm-cancel-btn:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.qm-submit-btn {
+  flex: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 18px;
+  background: var(--gold-primary);
+  color: #0b0b0b;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+  box-sizing: border-box;
+}
+
+.qm-submit-btn:hover:not(:disabled) {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+}
+
+.qm-submit-btn.is-success {
+  background: #22c55e;
+  color: #fff;
+}
+

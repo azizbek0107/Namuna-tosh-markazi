@@ -1,3 +1,4 @@
+import useLanguage from '../../hooks/useLanguage';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
@@ -6,6 +7,7 @@ import ProductSlide from "./ProductSlide";
 import "./ProductCarousel.css";
 
 export default function ProductCarousel({ products = heroProducts }) {
+  const { t } = useLanguage();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -65,7 +67,7 @@ export default function ProductCarousel({ products = heroProducts }) {
       className="product-carousel"
       role="region"
       aria-roledescription="karusel"
-      aria-label="Mahsulot namunalari"
+      aria-label={t('carousel.label')}
       tabIndex={0}
       onKeyDown={handleKey}
       onMouseEnter={() => setHovered(true)}
@@ -76,7 +78,7 @@ export default function ProductCarousel({ products = heroProducts }) {
       }}
     >
       <div className="carousel-topline">
-        <span>MAHSULOT NAMUNALARI</span>
+        <span>{t('carousel.title')}</span>
         <span aria-hidden="true">
           0{index + 1} / 0{count}
         </span>
@@ -167,10 +169,6 @@ export default function ProductCarousel({ products = heroProducts }) {
           )}
         </button>
       </div>
-      <p className="carousel-note">
-        Rang va naqsh asl rasmlarda ko‘rsatilgan. Tafsilotlarni buyurtma vaqtida
-        aniqlashtiring.
-      </p>
     </section>
   );
 }

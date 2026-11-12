@@ -1,9 +1,11 @@
+import useLanguage from '../../hooks/useLanguage';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ImageOff } from "lucide-react";
 import OrderButton from "../OrderButton";
 
 export default function ProductSlide({ product, index, count }) {
+  const { t } = useLanguage();
   const [failed, setFailed] = useState(false);
   return (
     <article
@@ -16,7 +18,7 @@ export default function ProductSlide({ product, index, count }) {
         {failed ? (
           <div className="product-image-error" role="status">
             <ImageOff size={32} aria-hidden="true" />
-            <p>Rasmni yuklab bo‘lmadi.</p>
+            <p>{t('common.image_failed')}</p>
           </div>
         ) : (
           <img
@@ -33,12 +35,12 @@ export default function ProductSlide({ product, index, count }) {
         )}
       </div>
       <div className="product-slide-copy">
-        <span className="product-edition">{product.edition}</span>
+        <span className="product-edition">{t(`carousel.${product.id}.edition`, product.edition)}</span>
         <h2>{product.name}</h2>
-        <p>{product.description}</p>
+        <p>{t(`carousel.${product.id}.description`, product.description)}</p>
         <div className="product-slide-actions">
           <Link className="text-link" to="/products">
-            Mahsulotlarni ko‘rish <ArrowUpRight size={15} aria-hidden="true" />
+            {t('hero.cta_products')} <ArrowUpRight size={15} aria-hidden="true" />
           </Link>
           <OrderButton />
         </div>

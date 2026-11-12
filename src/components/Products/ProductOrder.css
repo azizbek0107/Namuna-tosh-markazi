@@ -1,0 +1,23 @@
+.product-order { background: var(--bg-secondary); border: 1px solid var(--border-gold); padding: 25px; margin-top: 30px; scroll-margin-top: 20px; }
+.product-order-heading>span { font-size: 8px; letter-spacing: 1.8px; color: var(--gold-ink); }
+.product-order-heading h2 { font: 500 20px/1.4 var(--font-heading); letter-spacing: -.5px; margin-top: 12px; }
+.order-fields { display: grid; grid-template-columns: 1.3fr .7fr; gap: 14px; margin-top: 23px; }
+.order-fields label, .order-text-label { font-size: 10px; color: var(--text-secondary); display: grid; gap: 9px; min-width: 0; }
+.order-fields input, .order-fields select, .order-text-label textarea { width: 100%; min-width: 0; border: 1px solid var(--border); border-radius: 0; background: var(--bg-primary); color: var(--text-primary); padding: 12px; font-size: 11px; min-height: 44px; }
+.order-fields select:disabled { opacity: .75; }
+.order-fields input[aria-invalid=true] { border-color: var(--gold-primary); }
+.order-total { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-block: 21px; padding-bottom: 19px; border-bottom: 1px solid var(--border); }
+.order-total>span { font-size: 10px; color: var(--text-secondary); }
+.order-total>b { font-weight: 500; font-size: 12px; color: var(--gold-light); text-align: right; }
+.order-text-label textarea { font-size: 10px; line-height: 1.8; resize: vertical; min-height: 215px; }
+.order-buttons { display: flex; align-items: stretch; gap: 11px; margin-top: 17px; flex-wrap: wrap; }
+.catalog-copy-button, .catalog-telegram-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 12px 15px; font-size: 10px; flex: 1 1 170px; border: 1px solid var(--border-gold); transition: background-color .25s, color .25s; }
+.catalog-copy-button { color: var(--text-primary); background: transparent; }
+.catalog-copy-button:hover { background: var(--accent-wash); }
+.catalog-copy-button:disabled { opacity: .45; cursor: default; }
+.catalog-telegram-button { background: var(--button-bg); color: var(--button-text); border-color: var(--button-border); }
+.catalog-telegram-button:hover { background: var(--button-hover); }
+.order-status { font-size: 10px; line-height: 1.8; margin-top: 16px; color: var(--text-secondary); }
+.order-disclaimer { font-size: 9px; color: var(--text-caption); margin-top: 9px; line-height: 1.7; }
+.order-error { font-size: 10px; color: var(--gold-light); margin-top: 12px; line-height: 1.7; }
+@media (max-width: 600px) { .product-order { padding: 20px 16px; } .order-fields { grid-template-columns: 1fr; } .order-total { align-items: flex-start; } .order-total>b { max-width: 150px; } }

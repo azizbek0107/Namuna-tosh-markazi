@@ -1,4 +1,4 @@
-﻿.home-preview {
+.home-preview {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10%;
@@ -49,4 +49,9 @@
   .home-preview p {
     font-size: 12px;
   }
+}
+
+.home-why-wrapper {
+  border-top: 1px solid var(--border);
+  padding-bottom: 40px;
 }

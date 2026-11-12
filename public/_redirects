@@ -1,0 +1,6 @@
+# ==============================================================================
+# _redirects — Single Page Application (SPA) routing fallback
+# Netlify, Cloudflare Pages, Render, and compatible static web hosts
+# ==============================================================================
+/*    /index.html   200
+

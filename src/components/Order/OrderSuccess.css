@@ -1,0 +1,60 @@
+/* OrderSuccess.css — ready/copied/telegram_opened step */
+
+.omss-root {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.omss-intro {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.omss-copy-again {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  min-height: 40px;
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+  color: var(--gold-primary);
+  font: 600 11px/1 var(--font-body);
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 4px;
+}
+.omss-copy-again:hover {
+  background: var(--accent-wash);
+}
+
+.omss-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  min-height: 40px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-secondary);
+  font: 600 11px/1 var(--font-body);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.omss-back:hover {
+  color: var(--text-primary);
+  border-color: var(--border-gold);
+}
+
+.omss-actions-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+

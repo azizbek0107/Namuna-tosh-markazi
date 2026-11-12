@@ -132,12 +132,6 @@
   cursor: default;
   opacity: 0.55;
 }
-.carousel-note {
-  font-size: 8px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  margin-top: 13px;
-}
 @media (max-width: 1099px) {
   .product-carousel {
     padding: 16px;

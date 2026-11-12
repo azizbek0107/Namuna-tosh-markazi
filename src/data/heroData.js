@@ -5,7 +5,7 @@ export const heroData = {
   title: "NAMUNA TOSH MARKAZI",
   subtitle: "Sifat va nafislik uyg‘unligi",
   description:
-    "Uyingiz va loyihalaringiz uchun zamonaviy kerama granit, sokl, zinapoya hamda turli tosh mahsulotlari. Nafis dizayn, puxta ishlov va didingizga mos yechimlar.",
+    "Uyingiz va loyihalaringiz uchun zamonaviy kerama granit, granit, kafel hamda tabiiy tosh mahsulotlari. Nafis dizayn, puxta ishlov va didingizga mos yechimlar.",
   trust: ["Haqiqiy mahsulot rasmlari", "Loyihangizga mos tanlov"],
 };
 

@@ -1,0 +1,7 @@
+.calculator-quantity>label { display: block; font-size: 12px; margin-bottom: 12px; }
+.quantity-stepper { display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; border: 1px solid var(--border-gold); background: var(--bg-primary); }
+.quantity-stepper button { min-height: 48px; display: grid; place-items: center; border: 0; background: var(--accent-wash); color: var(--gold-ink); }
+.quantity-stepper button:disabled { opacity: .4; cursor: default; }
+.quantity-stepper input { min-width: 0; width: 100%; text-align: center; background: transparent; color: var(--text-primary); border: 0; padding: 12px 6px; font-size: 16px; }
+.calculator-quantity p { color: var(--text-secondary); font-size: 10px; line-height: 1.8; margin-top: 10px; }
+.calculator-quantity p.calculator-error { color: var(--gold-ink); }

@@ -1,0 +1,7 @@
+.discount-countdown p { color: var(--text-secondary); font-size: 9px; line-height: 1.8; }
+.discount-countdown time { color: var(--text-soft); }
+.discount-countdown-clock { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin-top: 12px; }
+.discount-countdown-clock>span { display: flex; flex-direction: column; align-items: center; gap: 6px; background: var(--bg-primary); border: 1px solid var(--border-gold); padding: 10px 3px; }
+.discount-countdown-clock b { font-size: 17px; line-height: 1.2; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--gold-ink); }
+.discount-countdown-clock small { color: var(--text-secondary); font-size: 8px; }
+.discount-countdown-ended { color: var(--text-secondary); font-size: 11px; }

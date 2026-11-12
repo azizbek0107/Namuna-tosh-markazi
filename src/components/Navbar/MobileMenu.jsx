@@ -1,13 +1,16 @@
+import useLanguage from '../../hooks/useLanguage';
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, X } from "lucide-react";
 import Brand from "../Brand";
 import OrderButton from "../OrderButton";
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import NavItem from "./NavItem";
 import { navigation } from "./navigation";
 
 export default function MobileMenu({ close, triggerRef }) {
+  const { t } = useLanguage();
   const panelRef = useRef(null);
   const closeRef = useRef(null);
   const reduceMotion = useReducedMotion();
@@ -88,18 +91,18 @@ export default function MobileMenu({ close, triggerRef }) {
         }}
       >
         <div className="mobile-panel-top">
-          <span id="mobile-menu-title">MENYU</span>
+          <span id="mobile-menu-title">{t('nav.menu')}</span>
           <button
             ref={closeRef}
             className="icon-button"
             onClick={close}
-            aria-label="Menyuni yopish"
+            aria-label={t('nav.close_menu')}
           >
             <X size={23} aria-hidden="true" />
           </button>
         </div>
         <Brand onClick={close} />
-        <nav aria-label="Mobil navigatsiya">
+        <nav aria-label={t('nav.mobile')}>
           <LayoutGroup id="mobile-nav">
             <motion.ul
               initial="hidden"
@@ -133,9 +136,10 @@ export default function MobileMenu({ close, triggerRef }) {
           </LayoutGroup>
         </nav>
         <div className="mobile-panel-bottom">
-          <p>LOYIHANGIZNI BIRGA BOSHLAYMIZ</p>
+          <p>{t('nav.start_together')}</p>
+          <LanguageSelector className="mobile-lang-selector" />
           <OrderButton onClick={close} />
-          <span>Kerama granit · Tosh · Me’moriy detallar</span>
+          <span>{t('nav.materials_tagline')}</span>
         </div>
       </motion.aside>
     </motion.div>,

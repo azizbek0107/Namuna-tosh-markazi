@@ -1,0 +1,38 @@
+/* admin.css — Global styles for administrative portal */
+
+.admin-layout {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.admin-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-header span {
+  font: 700 15px/1 var(--font-heading);
+  letter-spacing: 2.5px;
+}
+
+#admin-content {
+  flex: 1;
+  outline: none;
+}
+
+.admin-notice {
+  margin-top: 24px;
+  padding: 14px 18px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}

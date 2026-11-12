@@ -1,0 +1,41 @@
+/* AuthLoader.css */
+
+.auth-loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 16px;
+  min-height: 240px;
+}
+
+.auth-spinner {
+  width: 38px;
+  height: 38px;
+  border: 2px solid var(--border-gold);
+  border-top-color: var(--gold-primary);
+  border-radius: 50%;
+  animation: authSpin 0.8s linear infinite;
+}
+
+.auth-loader-text {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+  font-weight: 500;
+  margin: 0;
+}
+
+@keyframes authSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-spinner {
+    animation-duration: 2s;
+  }
+}

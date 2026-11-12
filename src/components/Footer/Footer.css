@@ -1,86 +1,246 @@
+/* ==============================================================================
+   Footer.css — Premium Black & Gold Footer with 2x2 Grid of Contacts & Location
+   ============================================================================== */
+
 .footer {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-gold);
   background: var(--footer-bg);
+  color: var(--text-primary);
+  margin-top: auto;
 }
+
+/* ── Footer Main Layout (Left: Brand, Center: Nav, Right: Contact & Location) ── */
 .footer-main {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr 1.6fr;
+  gap: 36px;
+  align-items: start;
+  padding-block: 44px;
+}
+
+/* ── Left Column: Brand & Tagline ── */
+.footer-left {
   display: flex;
-  align-items: center;
-  gap: 40px;
-  padding-block: 31px;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 320px;
 }
-.footer-main .brand-mark {
-  width: 30px;
-  height: 35px;
-  font-size: 23px;
-}
-.footer-main .brand-mark span {
-  font-size: 15px;
-}
-.footer-main .brand-wordmark {
-  font-size: 15px;
-  letter-spacing: 2.5px;
-}
-.footer-main .brand-wordmark > span {
-  font-size: 6px;
-  letter-spacing: 3.1px;
-}
-.footer-main p {
+
+.footer-tagline {
+  font-size: 12.5px;
+  line-height: 1.6;
   color: var(--text-secondary);
-  font-size: 11px;
+  margin: 0;
 }
-.footer-main > a:last-child {
-  margin-left: auto;
+
+.footer-hours {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.footer-hours span {
+  color: var(--gold-ink);
+  font-weight: 600;
+}
+
+/* ── Section Titles ── */
+.footer-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold-ink);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* ── Center: Navigation ── */
+.footer-nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-nav a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+  width: fit-content;
+}
+
+.footer-nav a:hover {
+  color: var(--gold-light);
+  transform: translateX(4px);
+}
+
+/* ── Right Column: 2x2 Grid of Contacts & Location (2ta 2ta yonma-yon) ── */
+.footer-contact-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-contact-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 20px;
+}
+
+.footer-contact-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  color: var(--text-soft);
-  font-size: 11px;
+  gap: 11px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 6px 8px;
+  border-radius: 4px;
+  min-width: 0;
+  border: 1px solid transparent;
 }
-.footer-main > a:last-child:hover {
+
+.footer-contact-item:hover {
+  background: var(--surface-hover, rgba(212, 175, 55, 0.05));
+  border-color: rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
+}
+
+.footer-contact-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-gold);
+  background: var(--accent-wash);
+  color: var(--gold-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-contact-item:hover .footer-contact-icon {
+  background: var(--gold-primary);
+  color: #0b0b0b;
+  border-color: var(--gold-primary);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+  transform: scale(1.05);
+}
+
+.footer-contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.footer-contact-label {
+  font-size: 9.5px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  line-height: 1;
+}
+
+.footer-contact-value {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+  transition: color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.footer-contact-item:hover .footer-contact-value {
   color: var(--gold-light);
 }
+
+/* ── Footer Bottom Bar ── */
 .footer-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 18px;
-  padding-block: 22px;
+  padding-block: 20px;
   border-top: 1px solid var(--border);
   color: var(--text-secondary);
 }
-.footer-bottom small,
-.footer-bottom a {
-  font-size: 9px;
+
+.footer-bottom small {
+  font-size: 11px;
 }
+
 .footer-bottom > span {
-  font-size: 7px;
+  font-size: 9px;
   letter-spacing: 2px;
+  color: var(--text-caption);
+  text-transform: uppercase;
 }
-.footer-bottom a:hover {
+
+.footer-bottom-contact {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-bottom-contact:hover {
   color: var(--gold-light);
 }
-@media (max-width: 700px) {
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
   .footer-main {
-    flex-wrap: wrap;
-    gap: 23px;
-    padding-block: 28px;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding-block: 36px;
   }
-  .footer-main p {
-    display: none;
+
+  .footer-left {
+    grid-column: 1 / -1;
+    max-width: 100%;
   }
-  .footer-main > a:last-child {
-    font-size: 10px;
-    gap: 7px;
+
+  .footer-contact-section {
+    grid-column: 1 / -1;
   }
-  .footer-bottom > span {
-    display: none;
-  }
-  .footer-bottom small {
-    font-size: 8px;
+
+  .footer-contact-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 20px;
   }
 }
-@media (max-width: 380px) {
-  .footer-main > a:last-child {
-    margin-left: 0;
+
+@media (max-width: 580px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-block: 30px;
+  }
+
+  .footer-contact-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 14px;
+  }
+}
+
+@media (max-width: 440px) {
+  .footer-contact-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 }

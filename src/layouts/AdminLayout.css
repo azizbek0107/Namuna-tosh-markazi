@@ -1,0 +1,35 @@
+/* AdminLayout.css */
+
+.admin-shell {
+  display: flex;
+  min-height: 100svh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  position: relative;
+}
+
+.admin-main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100svh;
+  transition: margin-left 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-main-content {
+  flex: 1;
+  padding: 28px 32px 60px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .admin-main-content {
+    padding: 20px 16px 40px;
+  }
+}
+

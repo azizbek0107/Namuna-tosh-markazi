@@ -1,6 +1,6 @@
 ﻿# Namuna Tosh Markazi
 
-React + Vite asosidagi Black & Gold reklama sayti. Navbar, routing, layout, kunduzgi/tungi rejim va haqiqiy mahsulot rasmlari bilan carousel mavjud. Katalog, chegirmalarni boshqarish va admin amallari hali amalga oshirilmagan.
+React + Vite asosidagi Black & Gold reklama sayti. Navbar, routing, kunduzgi/tungi rejim, haqiqiy rasmlar bilan carousel va mahsulotlar katalogi mavjud. Katalog lokal ma’lumotlar bilan ishlaydi; admin orqali boshqarish va backend keyingi bosqichda ulanadi.
 
 ## Ishga tushirish
 
@@ -16,6 +16,36 @@ npm run build
 npm run preview
 npm test
 ```
+
+## Buyurtma kalkulyatori
+
+`/products/:slug` sahifasida o‘lcham, dona yoki bevosita m²/pogon metr miqdori, yakuniy hisob va mijoz formasi mavjud. To‘liq fayllar ro‘yxati va tekshiruv natijalari: [output/calculator-report.md](output/calculator-report.md).
+
+Mahsulotning `orderConfig.quantityModes` maydoni `direct` va/yoki `pieces` usullarini ruxsat etadi; `defaultQuantityMode` dastlabki tanlovni belgilaydi. Dona sonidan m² hisoblash uchun variantda `lengthCm` va `widthCm` kerak. Pogon metr uchun `orderConfig.linearLengthField` aniq o‘lcham maydonini belgilaydi: odatda `lengthCm`, zarur bo‘lsa `widthCm`. Yetishmayotgan o‘lchamlar avtomatik yaratilmaydi.
+
+Chegirma umumiy summaga bir marta qo‘llanadi. Formadagi ism/telefon faqat sahifa xotirasida turadi; buyurtma matni ko‘rsatiladi va foydalanuvchi uni o‘zi Telegramga joylashtiradi. Serverga yuborish yoki backend yo‘q.
+
+## Chegirmalar va aksiyalar
+
+`/discounts` faqat ko‘rinadigan, narxi ma’lum va ayni vaqtda amaldagi chegirmasi bor mahsulotlarni ko‘rsatadi. Hozirgi haqiqiy mahsulotlarda tasdiqlangan narx/aksiya yo‘q: bo‘sh holat ko‘rsatiladi, bosh sahifadagi `DiscountBanner` yashirin turadi. Demo narxlar faqat `tests/fixtures/discountProducts.mjs` ichida.
+
+Mahalliy model saqlangan: `discountType` (`percentage` yoki `fixed`), `discountValue`, `discountStartsAt`, `discountEndsAt`, `discountIsActive`. Joriy mahsulotlarda `discountIsActive: false`. Eski yozuvlarda bu maydon bo‘lmasa, oldingi xatti-harakat saqlanadi; yangi ma’lumotlarda uni aniq belgilang. Kelajakdagi API `discount: { type, value, startDate, endDate, isActive }` shaklida kelsa, `getDiscountConfig` uni shu umumiy hisobga moslashtiradi; har bir mahsulotda faqat bitta shakldan foydalaning. Nested `discount` mavjud bo‘lsa u ustun keladi, `isActive: true` talab qilinadi.
+
+Yagona chegirma funksiyasi `priceUtils.applyOrderDiscount`: katalog narxi, aksiyalar kartasi, kalkulyator va Telegram hisoblari undan foydalanadi. Kartadagi chegirmali narx bitta sotuv birligidagi buyurtma misolidir. Summali chegirma ko‘p birlikli buyurtmada bir marta ayriladi; bu farq kartada tushuntiriladi. Eng katta chegirma saralashi shu bir birlik uchun samarali foizni taqqoslaydi.
+
+Sana-only qiymatlar (`2026-11-02`) Toshkent kunining boshidan oxirigacha talqin qilinadi. Vaqtli qiymatlarni `2026-11-02T18:00:00+05:00` yoki `Z` bilan saqlash tavsiya etiladi. Vaqt zonasi yo‘q vaqtli qiymat ham Toshkent vaqti sifatida olinadi. Tugash oni inklyuziv, undan keyin chegirma o‘chadi. Sanasiz chegirma ochiq muddatli, tugash sanasi bo‘lmasa countdown yo‘q. Hisob mijoz qurilmasi vaqtiga bog‘liq; server vaqti keyingi bosqichda ulanadi.
+
+Fayllar va tekshiruvlar: [output/discounts-report.md](output/discounts-report.md).
+
+## Biz haqimizda
+
+`/about` sahifasida korxona haqida matn, umumiy ishlab chiqarish bosqichlari, beshta mahsulot yo‘nalishi, xizmatlar, mahsulot foto galereyasi va CTA bor. Matnlar va rasmlar manbasi `src/data/aboutData.js`; kompaniya tarixi/ishlab chiqarish quvvati haqidagi tasdiqlanmagan raqamlar kiritilmagan. Galereya mavjud mahsulot rasmlaridan olinadi. Rasmi yo‘q yo‘nalishlarda neytral placeholder ko‘rsatiladi.
+
+Galereya modali: Escape/yopish tugmasi/tashqi fon bilan yopish, oldingi/keyingi, ←/→/Home/End, fokus sikli va qaytarish, fonni inert qilish va body scrollni tiklash. Sahifa SEO title/description qiymatlarini routing boshqaradi; boshqa sahifaga o‘tganda description tiklanadi.
+
+YouTube uchun `aboutVideo.channelName` berilgan, lekin `channelUrl: null`, `isVerified: false`. Haqiqiy kanal manzili tasdiqlangach `https://www.youtube.com/...` URL va `isVerified: true` yoziladi. Tasdiqlanmaguncha tugma o‘chiq; taxminiy iframe yoki video ID yo‘q. Sexning haqiqiy fotolari uchun `src/assets/images/about/` tayyor, hozir u yerga boshqa turdagi surat qo‘shilmagan.
+
+Fayllar va testlar: [output/about-report.md](output/about-report.md).
 
 ## Fayllar
 
@@ -92,7 +122,7 @@ Bu DOM integratsiya testi; haqiqiy brauzerdagi responsive maket, animatsiya ko�
 - Motion shared layout: https://motion.dev/docs/react-layout-animations
 - Motion sahifa o‘tishlari: https://motion.dev/docs/react-animate-presence
 
-Keyingi bosqichga tayyor: mahsulot katalogi, chegirmalar ma’lumotlari, real rasmlar va server autentifikatsiyasi.
+Keyingi bosqich: tasdiqlangan narx va o‘lchamlarni kiritish, backend integratsiyasi va server autentifikatsiyasi.
 
 ## Kunduzgi/tungi rejim va mahsulot carousel
 

@@ -80,8 +80,9 @@
   gap: 21px;
   font-size: 11px;
 }
+.navbar-actions .menu-toggle,
 .menu-toggle {
-  display: none;
+  display: none !important;
 }
 .mobile-menu-layer {
   position: fixed;
@@ -175,8 +176,9 @@
   .desktop-navigation {
     display: none;
   }
+  .navbar-actions .menu-toggle,
   .menu-toggle {
-    display: grid;
+    display: grid !important;
   }
 }
 @media (max-width: 480px) {

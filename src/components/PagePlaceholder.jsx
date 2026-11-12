@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import OrderButton from "./OrderButton";
+import useLanguage from '../hooks/useLanguage';
 
 export default function PagePlaceholder({
   number,
@@ -10,6 +11,7 @@ export default function PagePlaceholder({
   icon: Icon,
   children,
 }) {
+  const { t } = useLanguage();
   return (
     <section className="placeholder-page container">
       <div className="page-eyebrow">
@@ -31,7 +33,7 @@ export default function PagePlaceholder({
         <div className="placeholder-art" aria-hidden="true">
           <span className="placeholder-orbit" />
           <Icon size={72} strokeWidth={0.7} />
-          <span className="art-caption">NAMUNA / TOSH MARKAZI</span>
+          <span className="art-caption">{t('brand.short')} / {t('brand.descriptor')}</span>
         </div>
       </div>
       <div className="page-bottom-line">

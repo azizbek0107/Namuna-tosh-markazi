@@ -1,0 +1,63 @@
+/* DashboardStats.css */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.25s, transform 0.2s;
+}
+
+.stat-card:hover {
+  border-color: var(--border-gold);
+  transform: translateY(-1px);
+}
+
+.stat-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.stat-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  background: var(--accent-wash);
+  color: var(--gold-primary);
+  display: grid;
+  place-items: center;
+}
+
+.stat-card-value {
+  font: 700 28px/1 var(--font-heading);
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.stat-card-hint {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+

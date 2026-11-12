@@ -1,0 +1,103 @@
+/* ProductSizeEditor.css */
+
+.product-size-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.size-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.size-editor-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.size-editor-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.size-editor-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 40px;
+  gap: 10px;
+  align-items: center;
+}
+
+.size-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.size-input-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.size-input-field {
+  padding: 8px 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+.size-input-field:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+}
+
+.size-remove-btn {
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-top: 19px;
+  transition: all 0.2s;
+}
+
+.size-remove-btn:hover {
+  color: #ff8080;
+  border-color: #ff8080;
+  background: #c0454515;
+}
+
+.size-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 7px 14px;
+  font-size: 12px;
+  background: transparent;
+  border: 1px dashed var(--border-gold);
+  color: var(--gold-primary);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.size-add-btn:hover {
+  background: var(--accent-wash);
+  border-color: var(--gold-primary);
+}
+

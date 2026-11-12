@@ -26,10 +26,25 @@ function initialState() {
 export default function ThemeProvider({ children }) {
   const [{ theme, explicit }, setPreference] = useState(initialState);
   useLayoutEffect(() => {
-    document.documentElement.dataset.theme = theme;
+    const root = document.documentElement;
+    root.dataset.themeSwitching = 'true';
+    root.dataset.theme = theme;
     document
       .querySelector('meta[name="theme-color"]')
       ?.setAttribute("content", theme === "dark" ? "#080808" : "#F8F7F3");
+    // Commit all theme colours with transitions disabled, including portal UIs.
+    void root.offsetHeight;
+    let restoreFrame;
+    const paintFrame = requestAnimationFrame(() => {
+      restoreFrame = requestAnimationFrame(() => {
+        delete root.dataset.themeSwitching;
+      });
+    });
+    return () => {
+      cancelAnimationFrame(paintFrame);
+      if (restoreFrame !== undefined) cancelAnimationFrame(restoreFrame);
+      delete root.dataset.themeSwitching;
+    };
   }, [theme]);
 
   useEffect(() => {

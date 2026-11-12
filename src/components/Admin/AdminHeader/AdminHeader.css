@@ -1,0 +1,89 @@
+/* AdminHeader.css */
+
+.admin-header-bar {
+  height: 72px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.admin-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  cursor: pointer;
+}
+
+.admin-header-title {
+  font: 600 18px/1.2 var(--font-heading);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.admin-header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.admin-header-email-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gold-primary);
+  background: var(--accent-wash);
+  padding: 6px 12px;
+  border-radius: 2px;
+  border: 1px solid var(--border-gold);
+}
+
+.admin-header-logout {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 8px 14px;
+  color: var(--text-secondary);
+  font: 600 12px/1 var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin-header-logout:hover {
+  color: #ff8080;
+  border-color: #c0454588;
+  background: #c0454515;
+}
+
+@media (max-width: 900px) {
+  .admin-mobile-toggle {
+    display: grid;
+  }
+  .admin-header-bar {
+    padding: 0 16px;
+  }
+  .admin-header-email-badge {
+    display: none;
+  }
+}
+

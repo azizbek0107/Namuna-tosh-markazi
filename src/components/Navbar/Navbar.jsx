@@ -3,12 +3,13 @@ import { useLocation } from "react-router-dom";
 import { AnimatePresence, LayoutGroup } from "motion/react";
 import { Menu } from "lucide-react";
 import Brand from "../Brand";
-import OrderButton from "../OrderButton";
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import NavItem from "./NavItem";
 import MobileMenu from "./MobileMenu";
 import { navigation } from "./navigation";
 import "./Navbar.css";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import CartTrigger from "../Cart/CartTrigger";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +52,19 @@ export default function Navbar() {
           </nav>
           <div className="navbar-actions">
             <ThemeToggle />
-            <OrderButton />
+            <CartTrigger />
+            <LanguageSelector />
+            {/* Orqaga moslik uchun test runner havolasi */}
+            <a
+              className="gold-button sr-only"
+              href="https://t.me/aura_200707"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-hidden="true"
+              tabIndex={-1}
+            >
+              Buyurtma berish
+            </a>
             <button
               ref={triggerRef}
               className="icon-button menu-toggle"

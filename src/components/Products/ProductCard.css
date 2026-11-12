@@ -1,0 +1,259 @@
+/* ==============================================================================
+   ProductCard.css — Compact Product Card (Height reduced by 50%)
+   ============================================================================== */
+
+.catalog-card {
+  min-width: 0;
+  height: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  transition: transform .3s var(--ease-out), border-color .3s, box-shadow .3s, background-color .3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.catalog-card:hover {
+  border-color: var(--gold-primary);
+  box-shadow: 0 12px 30px var(--ui-shadow);
+  transform: scale(1.008);
+}
+
+/* ── Product Card when saved to order (Buyurtmaga saqlangan mahsulot) ── */
+.catalog-card.is-in-cart {
+  border-color: #10b981;
+  box-shadow: 0 0 0 1.5px #10b981, 0 8px 24px rgba(16, 185, 129, 0.2);
+}
+
+:root[data-theme="dark"] .catalog-card.is-in-cart,
+[data-theme="dark"] .catalog-card.is-in-cart,
+:root:not([data-theme="light"]) .catalog-card.is-in-cart {
+  border-color: #10b981;
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, var(--bg-secondary) 100%);
+  box-shadow: 0 0 0 1.5px #10b981, 0 8px 24px rgba(16, 185, 129, 0.25);
+}
+
+:root[data-theme="light"] .catalog-card.is-in-cart,
+[data-theme="light"] .catalog-card.is-in-cart {
+  border-color: #16a34a;
+  background: linear-gradient(180deg, rgba(22, 163, 74, 0.06) 0%, var(--bg-secondary) 100%);
+  box-shadow: 0 0 0 1.5px #16a34a, 0 8px 20px rgba(22, 163, 74, 0.18);
+}
+
+.catalog-badge-saved {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 3px;
+  margin-right: 4px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+  animation: badge-appear 0.25s ease;
+}
+
+:root[data-theme="light"] .catalog-badge-saved,
+[data-theme="light"] .catalog-badge-saved {
+  background: #16a34a;
+}
+
+@keyframes badge-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 50% reduced image stage height (135px vs original 270px) */
+.catalog-card-image {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 135px;
+  padding: 8px 10px;
+  background: var(--image-stage);
+  overflow: hidden;
+}
+
+.catalog-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 120px;
+  object-fit: contain;
+  transition: transform .4s var(--ease-out);
+}
+
+.catalog-card:hover .catalog-card-image img {
+  transform: scale(1.02);
+}
+
+.catalog-card-badges {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.catalog-image-arrow {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  border: 1px solid var(--border-gold);
+  background: var(--bg-secondary);
+  color: var(--gold-ink);
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+/* Compact copy spacing */
+.catalog-card-copy {
+  padding: 14px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.catalog-card-category {
+  font-size: 8px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+.catalog-card h2 {
+  font: 500 17px/1.3 var(--font-heading);
+  margin-top: 6px;
+  letter-spacing: -0.4px;
+}
+
+.catalog-card h2 a:hover {
+  color: var(--gold-light);
+}
+
+.catalog-card-description {
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.6;
+  margin-top: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.catalog-card-size {
+  color: var(--text-secondary);
+  font-size: 10px;
+  margin-top: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.product-price {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.product-price > span {
+  color: var(--gold-light);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.product-price del {
+  color: var(--text-secondary);
+  font-size: 10px;
+}
+
+.product-price small {
+  color: var(--text-secondary);
+  font-size: 9.5px;
+  line-height: 1.5;
+}
+
+.catalog-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.catalog-detail-link,
+.catalog-order-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  font-size: 10px;
+  border: 1px solid var(--border-gold);
+  padding: 7px;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.catalog-detail-link {
+  color: var(--text-soft);
+}
+
+.catalog-detail-link:hover {
+  color: var(--gold-light);
+  background: var(--accent-wash);
+}
+
+.catalog-order-link {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--button-border);
+}
+
+.catalog-order-link:hover {
+  background: var(--button-hover);
+}
+
+.catalog-image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 110px;
+  color: var(--text-secondary);
+  font-size: 10px;
+}
+
+@media (max-width: 767px) {
+  .catalog-card-image {
+    height: 125px;
+  }
+  .catalog-card-image img {
+    max-height: 110px;
+  }
+  .catalog-card-copy {
+    padding: 12px 10px 10px;
+  }
+  .catalog-card h2 {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-card:hover,
+  .catalog-card:hover .catalog-card-image img {
+    transform: none;
+  }
+}

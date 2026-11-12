@@ -105,6 +105,15 @@ async function settle() {
     });
   }
 }
+async function changeField(element, value) {
+  assert.ok(element, 'Expected a form field');
+  await act(async () => {
+    const prototype = element.tagName === 'SELECT' ? window.HTMLSelectElement.prototype : window.HTMLInputElement.prototype;
+    Object.getOwnPropertyDescriptor(prototype, 'value').set.call(element, value);
+    element.dispatchEvent(new Event(element.tagName === 'SELECT' ? 'change' : 'input', { bubbles: true }));
+  });
+  await settle();
+}
 async function key(key, options = {}) {
   await act(async () => {
     document.activeElement.dispatchEvent(
@@ -188,6 +197,87 @@ test("theme persistence, carousel, routing and accessible mobile navigation", as
       "/products",
       "Hero primary CTA navigates to products",
     );
+    assert.equal(document.querySelectorAll('.catalog-card').length, 2);
+    assert.equal(document.querySelectorAll('.catalog-card img').length, 2);
+    for (const image of document.querySelectorAll('.catalog-card img')) {
+      assert.ok(image.src.startsWith('data:image/jpeg'), 'Catalog uses the supplied photos');
+    }
+    assert.equal(document.querySelectorAll('.product-discount-badge').length, 0, 'Unknown prices have no fabricated discounts');
+    await changeField(document.querySelector('.product-sort select'), 'name-desc');
+    assert.equal(document.querySelector('.catalog-card h2').textContent, 'Black Crystal');
+    await changeField(document.querySelector('#product-search'), 'CRYSTAL');
+    assert.equal(document.querySelectorAll('.catalog-card').length, 1);
+    assert.equal(document.querySelector('.catalog-card h2').textContent, 'Black Crystal');
+    await click(document.querySelector('[aria-label="Qidiruvni tozalash"]'));
+    await settle();
+    await click(document.querySelector('input[value="sokl"]'));
+    await settle();
+    assert.match(document.querySelector('.catalog-empty h2').textContent, /Mahsulot topilmadi/);
+    await click(document.querySelector('.catalog-empty button'));
+    await settle();
+    assert.equal(document.querySelectorAll('.catalog-card').length, 2);
+    await click(document.querySelector('.catalog-mobile-filter'));
+    assert.equal(document.querySelector('.catalog-mobile-filter').getAttribute('aria-expanded'), 'true');
+    await act(async () => {
+      document.querySelector('#product-filters').dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    });
+    assert.equal(document.querySelector('.catalog-mobile-filter').getAttribute('aria-expanded'), 'false');
+    await changeField(document.querySelector('#product-search'), 'Angola');
+    const catalogSearch = window.location.search;
+    await click(document.querySelector('.catalog-order-link'));
+    await settle();
+    assert.equal(window.location.pathname, '/products/angola-black');
+    assert.equal(document.querySelector('h1').textContent, 'Angola Black');
+    assert.equal(document.activeElement.id, 'buyurtma');
+    assert.equal(document.querySelectorAll('.gallery-thumbnails button').length, 2);
+    assert.match(document.querySelector('.gallery-navigation span').textContent, /1 \/ 2/);
+    await click(document.querySelector('[aria-label="Keyingi rasm"]'));
+    await settle();
+    assert.match(document.querySelector('.gallery-navigation span').textContent, /2 \/ 2/);
+    assert.equal(document.querySelector('.order-text-label textarea'), null, 'Customer must prepare the order after validation');
+    assert.match(document.querySelector('.calculator-sizes').textContent, /O‘lchamni aniqlashtirish/);
+    assert.equal(document.querySelector('input[name="quantity-mode"][value="pieces"]').disabled, true);
+    await click(document.querySelector('.calculator-prepare'));
+    assert.equal(document.activeElement.id, 'order-name');
+    assert.ok(document.querySelector('#order-name-error'));
+    await changeField(document.querySelector('#order-name'), 'Ali');
+    await changeField(document.querySelector('#order-phone'), '+998 90');
+    await click(document.querySelector('.calculator-prepare'));
+    assert.equal(document.activeElement.id, 'order-phone');
+    assert.ok(document.querySelector('#order-phone-error'));
+    await changeField(document.querySelector('#order-phone'), '+998 90 123 45 67');
+    await click(document.querySelector('[aria-label="Miqdorni oshirish"]'));
+    assert.equal(document.querySelector('#order-quantity').value, '2');
+    await click(document.querySelector('[aria-label="Miqdorni kamaytirish"]'));
+    assert.equal(document.querySelector('#order-quantity').value, '1');
+    await click(document.querySelector('.calculator-prepare'));
+    await settle();
+    const orderText = document.querySelector('.order-text-label textarea');
+    assert.match(orderText.value, /Mahsulot: Angola Black/);
+    assert.match(orderText.value, /O‘lcham aniqlashtiriladi/);
+    assert.match(orderText.value, /Mijoz: Ali/);
+    assert.match(orderText.value, /Telefon: \+998901234567/);
+    assert.equal(document.querySelector('.catalog-telegram-button').href, 'https://t.me/aura_200707');
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async () => { throw new Error('Clipboard unavailable'); } } });
+    await click(document.querySelector('.catalog-copy-button'));
+    assert.match(document.querySelector('.order-status').textContent, /Avtomatik nusxalash ishlamadi/);
+    assert.equal(document.activeElement, orderText);
+    assert.equal(orderText.selectionEnd, orderText.value.length);
+    let copiedOrder;
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async text => { copiedOrder = text; } } });
+    await click(document.querySelector('.catalog-copy-button'));
+    assert.equal(copiedOrder, orderText.value);
+    assert.match(document.querySelector('.catalog-copy-button').textContent, /Nusxalandi/);
+    await changeField(document.querySelector('[aria-label="Buyurtma miqdori"]'), '0');
+    assert.equal(document.querySelector('.calculator-prepare').disabled, true);
+    assert.equal(document.querySelector('.catalog-copy-button'), null);
+    await changeField(document.querySelector('[aria-label="Buyurtma miqdori"]'), '2.5');
+    assert.match(document.querySelector('.order-text-label textarea').value, /Miqdor: 2,5 m²/);
+    await click(document.querySelector('.detail-back'));
+    await settle();
+    assert.equal(window.location.search, catalogSearch, 'Returning to catalog preserves search and filters');
+    assert.equal(document.querySelector('#product-search').value, 'Angola');
+    assert.equal(document.querySelectorAll('.catalog-card').length, 1);
     await click(document.querySelector(".navbar .brand"));
     await settle();
     assert.equal(window.location.pathname, "/");
@@ -338,9 +428,8 @@ test("theme persistence, carousel, routing and accessible mobile navigation", as
 
     const routes = [
       ["/products", "Makoningizga mos tanlov."],
-      ["/discounts", "Yaxshi tanlovga yaxshi imkoniyat."],
-      ["/about", "Har bir detalning o‘z o‘rni bor."],
-      ["/contact", "Suhbatdan boshlaymiz."],
+      ["/discounts", "MAXSUS TAKLIFLAR"],
+      ["/about", "NAMUNA TOSH MARKAZI"],
     ];
     const originalNavbar = document.querySelector(".navbar");
     for (const [path, heading] of routes) {
@@ -363,6 +452,16 @@ test("theme persistence, carousel, routing and accessible mobile navigation", as
         "Shared navbar must stay mounted",
       );
     }
+    // Test navigating to /contact via footer link (contact section moved to footer)
+    await click(document.querySelector('footer a[href="/contact"]'));
+    await settle();
+    assert.equal(window.location.pathname, "/contact");
+    assert.equal(document.querySelector("h1").textContent, "Suhbatdan boshlaymiz.");
+    assert.equal(
+      document.querySelector(".navbar"),
+      originalNavbar,
+      "Shared navbar must stay mounted",
+    );
     assert.ok(scrollCalls >= 5);
     assert.match(document.title, /Bog‘lanish — Namuna Tosh Markazi/);
     await click(document.querySelector(".theme-toggle"));
